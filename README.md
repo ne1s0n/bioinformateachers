@@ -1,2 +1,2 @@
 # bioinformateachers
-Code archive linked to the bioinformatics-oriented educational website bioinformateachers.wordpress.com
+Code archive linked to the bioinformatics-oriented educational website [The Bioinformateachers](bioinformateachers.wordpress.com)
