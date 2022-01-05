@@ -1,2 +1,17 @@
 #ignoring python notebook chechpoints
 .ipynb_checkpoints
+
+# R History files
+.Rhistory
+.Rapp.history
+
+# R Session Data files
+.RData
+.RDataTmp
+
+# RStudio files
+.Rproj.user/
+*.Rproj
+
+# rendered R Markdown files
+*.pdf

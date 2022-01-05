@@ -1,0 +1,172 @@
+---
+title: "Mixed models"
+author: "Filippo Biscarini"
+date: "12/31/2021"
+output: 
+  html_document:
+    keep_md: false
+  github_document:
+    pandoc_args: ['--lua-filter', 'math-github.lua']
+bibliography: ../bibliography/biostatistics.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library("katex")
+```
+
+## Mixed models
+
+Linear mixed models are a very powerful statistical tool that, simply put, allows to mix "fixed" (systematic) and "random" effects in one model equation:  
+
+```{r, echo=FALSE}
+# tex = "\\mathbf{y} = \\mathbf{Xb} + \\mathbf{Zu} + \\mathbf{e}"
+# katex_html(
+#   tex,
+#   displayMode = TRUE,
+#   include_css = TRUE,
+#   preview = interactive()
+# )
+```
+
+$$
+\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}
+$$
+
+- **y**: vector of response (target) variable (observations) $(n,1)$
+- **b**: vector of fixed effects $(f,1)$
+- **u**: vector of random effects $(r,1)$
+- **e**: vector of model residuals $(n,1)$
+- **X**: design matrix that relates observations (responses) with fixed effects $(n,f)$
+- **Z**: design matrix that relates observations (responses) with random effects $(n,r)$
+
+The *letters* between brackets refer to the vector/matrix dimensions: *n* for the number of records (observations), *f* for the number of fixed effects, *r* for the number of random effects.
+
+This is a **linear additive mixed model**: 
+
+- *linear* because it is a linear combination of variables (a.k.a. "parameters"): **b**, **u** (and *e*)
+- *additive* because variables are summed together
+- *mixed* because (again) it mixes fixed and random effects
+
+While **fixed effects** are just point estimates of underlying *true* values, **random effects** are associated with a distribution and, importantly, a **variance component**. 
+The total variance of the observations (**y**'s) is partitioned into one component belonging to the random effect **u** and the residual variance:
+
+```{r, echo=FALSE}
+# tex = "Var(\\mathbf{y}) = \\mathbf{K} \\sigma_u^2 + \\mathbf{R} + \\sigma_e^2"
+# katex_html(
+#   tex,
+#   displayMode = TRUE,
+#   include_css = TRUE,
+#   preview = interactive()
+# )
+```
+
+$$
+Var(\mathbf{y}) = \mathbf{K} \sigma_u^2 + \mathbf{R} \sigma_e^2
+$$
+
+where:
+
+- **K**: *covariance* (relationship) *matrix* between the observations (for the specific random effect)
+- **R** is the residual covariance matrix, usually simplified to $\mathbf{I}$ (identity matrix) under the assumption of independence between residuals
+
+Estimates for the parameters in the mixed model above are obtained by solving the **mixed model equations** (MME, @henderson1950estimaton). MME are set up by expanding the equation $\left(\mathbf{X'+Z'}\right) \cdot \left(\mathbf{Xb}+ \mathbf{Zu} \right) = \left( \mathbf{X'+Z'} \right) \cdot \mathbf{y}$, and then adding to the random term **u** the corresponding covariance matrix:
+
+$$
+\left[
+\begin{array}{cc}
+\mathbf{X'X} & \mathbf{X'Z} \\
+\mathbf{Z'X} & \mathbf{Z'Z} + \mathbf{K^{-1}\cdot \frac{\sigma_e^2}{\sigma_u^2}}
+\end{array}
+\right] \cdot
+\left[ 
+\begin{array}{c}
+\mathbf{b}\\
+\mathbf{u}
+\end{array}
+\right]
+= \left[
+\begin{array}{c}
+\mathbf{X'y}\\
+\mathbf{Z'y}
+\end{array}
+\right]
+$$
+
+**MMEs** are a very powerful statistical/mathematical tool, that can be extended in a very flexible way to a very large number of different (and increasingly) models (see for instance @mrode2014linear)
+
+### Mixed models: an illustration in R
+
+We take data on the yield of 41 potato lines (`DT_example` dataset) from different environments (combination of location and year).
+There are *185* records.
+
+```{r mixed_model, warning=FALSE, message=FALSE}
+library("sommer")
+library("tidyverse")
+data(DT_example)
+DT <- DT_example
+
+head(DT)
+```
+
+We first look at the distribution of the quantitative response variable:
+
+```{r}
+hist(DT$Yield, xlab = "yield", main="response variable")
+```
+Then at the distribution of observations (yield) per environemnt:
+
+```{r}
+p <- ggplot(DT, aes(x = Name, y = Yield)) + geom_jitter(aes(color=Name)) + facet_wrap(~Env)
+p <- p + theme(legend.position = "none", axis.text.x = element_blank())
+p
+```
+
+### Fitting the mixed model
+
+We now fit a mixed model of the form:
+
+```{r, echo=FALSE}
+# tex = "\\mathbf{yield} = \\mathbf{X} \\cdot \\mathbf{env} + \\mathbf{Z} \\cdot \\mathbf{variety} + \\mathbf{e}"
+# katex_html(
+#   tex,
+#   displayMode = TRUE,
+#   include_css = TRUE,
+#   preview = interactive()
+# )
+```
+
+$$
+\mathbf{yield} = \mathbf{X} \cdot \mathbf{env} + \mathbf{Z} \cdot \mathbf{variety} + \mathbf{e}
+$$
+
+where we take the *environment* as a "fixed" systematic effect to be point-estimated, and *variety* as the random effect of the potato varieties (a proxy for a *genetic effect*, but with no specified kinship matrix).
+This model assumes one variance component for the random effect *variety* (variable `Name` in the code), and one residual variance component (`rcov = ~ units`, in the code):
+
+```{r}
+fit <-mmer(fixed = Yield ~ Env, 
+            random = ~ Name,
+            rcov = ~ units,
+            data = DT, 
+            verbose = FALSE)
+```
+
+```{r}
+summary(fit)
+```
+
+```{r}
+ratio <- fit$sigmaVector[1]/fit$sigmaVector[2]
+fit$sigmaVector
+```
+
+From the object returned by the `mmer` function, we can see that the variance components are:
+
+- $\sigma_u^2$ = `r fit$sigmaVector[1]`, for the **variety** variance component
+- $\sigma_e^2$ = `r fit$sigmaVector[2]`, for the **residual** variance component
+
+This gives a ratio of `r round(ratio,3)` for the proportion of total phenotypic variance (*yield*) explained by the **variety** effect, which corresponds to **`r round(ratio,3)*100`%**.
+
+## References
+
