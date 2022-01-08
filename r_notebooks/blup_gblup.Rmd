@@ -1,0 +1,30 @@
+---
+title: "From BLUP to GBLUP"
+author: "Filippo Biscarini"
+date: "08/01/2022"
+output: 
+  html_document:
+    keep_md: false
+  github_document:
+    pandoc_args: ['--lua-filter', 'math-github.lua']
+bibliography: ../bibliography/biostatistics.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## BLUP (Best Linear Unbiased Prediction) models
+
+**BLUP models** are an important example of the application of **mixed linear models** to *life sciences* problems.
+BLUP models are of paramount importance in plant and animal breeding: before the advent of affordable high-throughput genomic data (e.g. SNP arrays, RAD-sequencing/GBS etc.), the genetic improvement of crops and farm animal species has relied for decades on BLUP models based on genealogies and phenotypic data (with remarkable results, by the way!).
+The BLUP methodology has been pioneered by C.R. Henderson (see for instance @henderson1974general), and is based on a mixed model which, in the simplest case, has the following form:
+
+$$
+\mathbf{y} = \mathbf{Xb} + \mathbf{Za} + \mathbf{e}
+$$
+
+## References
+
+
+
