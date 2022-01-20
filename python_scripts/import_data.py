@@ -57,6 +57,6 @@ from import_functions import download_phenotype_files, load_phenotypes_and_selec
 download_phenotype_files(base_dir, DATAFOLDER_URL,is_sorted=True)
 
 trait = 'simphe_mean0_hSquare0.7_cv0.1_QTN100_A10_D0_AA0_AD0_DA0_DD0_epoch1642079623'
-phenotypes = load_phenotypes_and_select_trait(base_dir, trait, is_sorted=True, df_output=True)
+phenotypes = load_phenotypes_and_select_trait(base_dir, trait, is_sorted=True, df_output=False)
 
 print(phenotypes)
