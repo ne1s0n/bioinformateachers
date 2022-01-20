@@ -132,7 +132,7 @@ def load_phenotypes_and_select_trait(base_dir, trait, is_sorted=True, df_output=
     if df_output == True:
         temp.reset_index(inplace=True)
         temp = temp.rename(columns = {'index':'sample'})
-        phen = temp[["sample", trait]].to_numpy()
+        phen = temp[["sample", trait]]
     else:
     ## convert to numpy.array and return (1d array, sorted as the input file and as the kinship matrix)
         phen = temp[trait].to_numpy()
