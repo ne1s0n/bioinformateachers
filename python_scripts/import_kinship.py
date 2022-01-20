@@ -38,7 +38,7 @@ args = parser.parse_args()
 # Print to check arguments values
 print('Remote folder is:', args.remote_folder)
 print('Target folder is:', args.target_dir)
-print('Dataset is:', args.target_dir)
+print('Dataset is:', args.dataset)
 
 #### Set up of parameters and libraries
 ## SETTINGS #######################

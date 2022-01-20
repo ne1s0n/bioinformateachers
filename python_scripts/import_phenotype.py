@@ -42,7 +42,7 @@ args = parser.parse_args()
 # Print to check arguments values
 print('Remote folder is:', args.remote_folder)
 print('Target folder is:', args.target_dir)
-print('Dataset is:', args.target_dir)
+print('Dataset is:', args.dataset)
 print('Sorted or not?', 'sorted' if args.sorted == True else 'non sorted')
 print('Selected trait:', args.trait)
 print('Output type:', '2d Pandas dataframe' if args.outtype == True else '1d numpy array')
