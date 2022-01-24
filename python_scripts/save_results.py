@@ -27,4 +27,9 @@ def parse_history(h, phenotypes, val_split, trait):
     temp['validation_split'] = val_split
     temp['trait'] = trait
     
+    column_names = ["trait","sample_size","validation_split","n_epochs","loss",
+                    "pearson","rmse","val_loss","val_pearson","val_rmse"]
+    
+    temp = temp.reindex(columns=column_names)
+    
     return temp
