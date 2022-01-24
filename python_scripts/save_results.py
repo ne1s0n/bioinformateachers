@@ -38,7 +38,9 @@ def parse_history(h, phenotypes, val_split, trait):
 def writeout_results(res, filename):
     
     if os.path.exists(filename):
+        print("File '{}' already exists, appending results to it".format(filename))
         res.to_csv(filename, mode='a', header=False)
     else:
+        print("Creating file '{}' and writing results to it".format(filename))
         res.to_csv(filename, mode='w', header=True)
         
