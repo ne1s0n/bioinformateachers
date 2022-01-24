@@ -8,6 +8,7 @@ Created on Mon Jan 24 11:50:14 2022
 
 """ Function(s) to collect results from deep learning runs """
 
+import os
 import pandas as pd
 
 #get results to be saved
@@ -33,3 +34,11 @@ def parse_history(h, phenotypes, val_split, trait):
     temp = temp.reindex(columns=column_names)
     
     return temp
+
+def writeout_results(res, filename):
+    
+    if os.path.exists(filename):
+        res.to_csv(filename, mode='a', header=False)
+    else:
+        res.to_csv(filename, mode='w', header=True)
+        
