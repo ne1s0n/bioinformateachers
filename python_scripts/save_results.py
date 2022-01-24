@@ -39,8 +39,8 @@ def writeout_results(res, filename):
     
     if os.path.exists(filename):
         res.to_csv(filename, mode='a', header=False)
-        
         return "File '{}' already exists, appending results to it".format(filename)
+    
     else:
         res.to_csv(filename, mode='w', header=True)
         return "Creating file '{}' and writing results to it".format(filename)
