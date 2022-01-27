@@ -12,7 +12,7 @@ import os
 import pandas as pd
 
 #get results to be saved
-def parse_history(h, phenotypes, val_split, trait):
+def parse_history(h, phenotypes, val_split, trait, config_dict):
     
     ## get metrics from history object
     df = pd.DataFrame(h.history)
@@ -28,8 +28,18 @@ def parse_history(h, phenotypes, val_split, trait):
     temp['validation_split'] = val_split
     temp['trait'] = trait
     
-    column_names = ["trait","sample_size","validation_split","n_epochs","loss",
-                    "pearson","rmse","val_loss","val_pearson","val_rmse"]
+    ## NN hyperparameters
+    temp['learn_rate'] = repr(config_dict['learn_rate'])
+    temp['conv_filter'] = "_".join([str(x) for x in config_dict['conv_filter']])
+    temp['pool_filter'] = "_".join([str(x) for x in config_dict['pool_filter']])
+    temp['drop_rate'] = repr(config_dict['drop_rate'])
+    temp['dense_nodes'] = "_".join([str(x) for x in config_dict['dense_nodes']])
+    temp['conv_layers'] = "_".join([str(x) for x in config_dict['conv_layers']])
+    
+    column_names = ["trait","sample_size","learn_rate","drop_rate","conv_filter",
+                    "conv_layers","pool_filter","dense_nodes","validation_split",
+                    "n_epochs","loss","pearson","rmse","val_loss","val_pearson",
+                    "val_rmse"]
     
     temp = temp.reindex(columns=column_names)
     
