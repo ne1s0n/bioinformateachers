@@ -34,9 +34,9 @@ def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [1
 		conv_section.pop(0), 
 		kernel_size=conv_kernel,
 		activation='relu',
-		input_shape=input_shape),
+		input_shape=input_shape, 
 		padding=conv_padding
-		)
+	))
 	model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 	model.add(Dropout(dropout_rate))
 
