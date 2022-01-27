@@ -12,8 +12,8 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
 #creates a plot with the required metric from the object returned 
-#by .fit() function. If an outfile if passed, the figure is saved,
-#otherwise pyplot .show() is invoked
+#by .fit() function. If an outfile if passed, the figure is saved
+#before invoking pyplot .show() 
 def plot_loss_history(h, metric = 'loss', outfile = None):
 	pyplot.plot(h.history[metric], label = 'Train ' + metric)
 	pyplot.plot(h.history['val_' + metric], label = 'Validation ' + metric)
@@ -23,8 +23,7 @@ def plot_loss_history(h, metric = 'loss', outfile = None):
 
 	if outfile is not None:
 		pyplot.savefig(outfile)
-	else:
-		pyplot.show()
+	pyplot.show()
 
 #instantiate a network, which will then need to be compiled
 def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [128], conv_kernel = (3, 3), maxpooling_kernel = (2,2), dropout_rate = 0.25):
