@@ -26,7 +26,7 @@ def plot_loss_history(h, metric = 'loss', outfile = None):
 	pyplot.show()
 
 #instantiate a network, which will then need to be compiled
-def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [128], conv_kernel = (3, 3), maxpooling_kernel = (2,2), dropout_rate = 0.25):
+def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [128], conv_kernel = (3, 3), conv_padding = 'same', maxpooling_kernel = (2,2), dropout_rate = 0.25):
 	model = Sequential()
 	
 	#first node is different, because it requires input shape
@@ -34,14 +34,16 @@ def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [1
 		conv_section.pop(0), 
 		kernel_size=conv_kernel,
 		activation='relu',
-		input_shape=input_shape))
+		input_shape=input_shape, 
+		padding=conv_padding
+	))
 	model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 	model.add(Dropout(dropout_rate))
 
 	
 	#convolutionary section
 	for nodes in conv_section:
-		model.add(Conv2D(nodes, conv_kernel, activation='relu'))
+		model.add(Conv2D(nodes, conv_kernel, activation='relu', padding=conv_padding))
 		model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 		model.add(Dropout(dropout_rate))
 		
