@@ -21,7 +21,7 @@ def plot_loss_history(h, metric = 'loss'):
     pyplot.show()
 
 #instantiate a network, which will then need to be compiled
-def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [128], conv_kernel = (3, 3), maxpooling_kernel = (2,2)), dropout_rate = 0.25:
+def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [128], conv_kernel = (3, 3), maxpooling_kernel = (2,2), dropout_rate = 0.25):
 	model = Sequential()
 	
 	#first node is different, because it requires input shape
@@ -30,14 +30,14 @@ def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [1
 		kernel_size=kernel_size,
 		activation='relu',
 		input_shape=input_shape))
-	model.add(MaxPooling2D(pool_size=maxpooling_kernel)
+	model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 	model.add(Dropout(dropout_rate))
 
 	
 	#convolutionary section
 	for nodes in conv_section:
 		model.add(Conv2D(nodes, kernel_size, activation='relu'))
-		model.add(MaxPooling2D(pool_size=maxpooling_kernel)
+		model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 		model.add(Dropout(dropout_rate))
 		
 	#a flatten layer separates conv section from dense section
