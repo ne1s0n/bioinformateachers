@@ -17,8 +17,7 @@ def parse_history(h, phenotypes, val_split, trait):
     ## get metrics from history object
     df = pd.DataFrame(h.history)
     n_epochs = df.shape[0]
-    threshold = int(n_epochs*0.9)
-    temp = df.iloc[threshold:(n_epochs-1),:].mean(axis=0)
+    temp = df.iloc[(n_epochs-6):(n_epochs-1),:].mean(axis=0)
     temp = temp.to_frame()
     temp.rename(columns={0: 'value'}, inplace=True)
     temp = temp.transpose()
