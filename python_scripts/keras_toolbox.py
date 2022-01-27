@@ -53,7 +53,7 @@ def instantiate_network(config_dict):
 	model = Sequential()
 	
 	#step counter for the maxpooling layers
-	mpstep = 0
+	mp_cnt = 0
 	
 	#first node is different, because it requires input shape
 	model.add(Conv2D(
