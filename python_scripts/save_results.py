@@ -12,7 +12,7 @@ import os
 import pandas as pd
 
 #get results to be saved
-def parse_history(h, phenotypes, val_split, trait, config_dict):
+def parse_history(h, phenotypes, val_split, trait, config_dict, max_val_pearson):
     
     ## get metrics from history object
     df = pd.DataFrame(h.history)
@@ -23,6 +23,7 @@ def parse_history(h, phenotypes, val_split, trait, config_dict):
     temp = temp.transpose()
     
     ## add columns to dataframe
+    temp['max_val_pearson'] = max_val_pearson
     temp['n_epochs'] = h.params['epochs']
     temp['sample_size'] = len(phenotypes)
     temp['validation_split'] = val_split
@@ -39,7 +40,7 @@ def parse_history(h, phenotypes, val_split, trait, config_dict):
     column_names = ["trait","sample_size","learn_rate","drop_rate","conv_filter",
                     "conv_layers","pool_filter","dense_nodes","validation_split",
                     "n_epochs","loss","pearson","rmse","val_loss","val_pearson",
-                    "val_rmse"]
+                    "val_rmse","max_val_pearson"]
     
     temp = temp.reindex(columns=column_names)
     
