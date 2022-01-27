@@ -12,7 +12,7 @@ import os
 import pandas as pd
 
 #get results to be saved
-def parse_history(h, phenotypes, val_split, trait):
+def parse_history(h, phenotypes, trait, config_dict, max_val_pearson, nparams, replicate):
     
     ## get metrics from history object
     df = pd.DataFrame(h.history)
@@ -23,13 +23,26 @@ def parse_history(h, phenotypes, val_split, trait):
     temp = temp.transpose()
     
     ## add columns to dataframe
+    temp['max_val_pearson'] = max_val_pearson
     temp['n_epochs'] = h.params['epochs']
     temp['sample_size'] = len(phenotypes)
-    temp['validation_split'] = val_split
+    temp['validation_split'] = config_dict['val_split']
     temp['trait'] = trait
+    temp['nparams'] = nparams
+    temp['replicate'] = replicate
     
-    column_names = ["trait","sample_size","validation_split","n_epochs","loss",
-                    "pearson","rmse","val_loss","val_pearson","val_rmse"]
+    ## NN hyperparameters
+    temp['learn_rate'] = repr(config_dict['learn_rate'])
+    temp['conv_filter'] = "_".join([str(x) for x in config_dict['conv_filter']])
+    temp['pool_filter'] = "_".join([str(x) for x in config_dict['pool_filter']])
+    temp['drop_rate'] = repr(config_dict['drop_rate'])
+    temp['dense_layers'] = "_".join([str(x) for x in config_dict['dense_layers']])
+    temp['conv_layers'] = "_".join([str(x) for x in config_dict['conv_layers']])
+    
+    column_names = ["trait","sample_size","learn_rate","drop_rate","conv_filter",
+                    "conv_layers","pool_filter","dense_layers","validation_split",
+                    "n_epochs","loss","pearson","rmse","val_loss","val_pearson",
+                    "val_rmse","max_val_pearson","nparams","replicate"]
     
     temp = temp.reindex(columns=column_names)
     
