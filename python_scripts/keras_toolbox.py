@@ -32,7 +32,7 @@ def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [1
 	#first node is different, because it requires input shape
 	model.add(Conv2D(
 		conv_section.pop(0), 
-		kernel_size=kernel_size,
+		kernel_size=conv_kernel,
 		activation='relu',
 		input_shape=input_shape))
 	model.add(MaxPooling2D(pool_size=maxpooling_kernel))
@@ -41,7 +41,7 @@ def instantiate_network(input_shape, conv_section = [32, 64], dense_section = [1
 	
 	#convolutionary section
 	for nodes in conv_section:
-		model.add(Conv2D(nodes, kernel_size, activation='relu'))
+		model.add(Conv2D(nodes, conv_kernel, activation='relu'))
 		model.add(MaxPooling2D(pool_size=maxpooling_kernel))
 		model.add(Dropout(dropout_rate))
 		
