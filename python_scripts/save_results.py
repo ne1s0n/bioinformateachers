@@ -57,9 +57,10 @@ def parse_history(h, phenotypes, trait, config_dict, max_val_pearson, nparams, r
     temp['drop_rate'] = repr(config_dict['drop_rate'])
     temp['dense_layers'] = "_".join([str(x) for x in config_dict['dense_layers']])
     temp['conv_layers'] = "_".join([str(x) for x in config_dict['conv_layers']])
+    temp['conv_padding'] = config_dict['conv_padding']
     
     column_names = ["trait","sample_size","learn_rate","drop_rate","conv_filter",
-                    "conv_layers","pool_filter","dense_layers","validation_split",
+                    "conv_layers","conv_padding","pool_filter","dense_layers","validation_split",
                     "n_epochs","loss","pearson","rmse","val_loss","val_pearson",
                     "val_rmse","max_val_pearson","nparams","replicate"]
     
