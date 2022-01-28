@@ -9,7 +9,26 @@ Created on Mon Jan 24 11:50:14 2022
 """ Function(s) to collect results from deep learning runs """
 
 import os
+import re
 import pandas as pd
+
+def make_file_names(trait,config_dict,replicate,extension='png'):
+    
+    print("making file names for trait ", trait)
+    ## from config dict keep: num_epochs, val_split, learn_rate, conv_filter,
+    ## pool_filter, drop_rate, dense_layers, conv_layers
+    params = [x for x in config_dict.keys() if x not in ['input_shape',
+                                                    'conv_padding','batch_size']]
+    naam = "_".join([repr(config_dict[x]) for x in params])
+    
+    ## process string to strip special characters and replace with '_'
+    naam = re.sub("[,\]\[\(\)]", "", naam)
+    naam = re.sub(" ", "_", naam)
+    
+    ## attach replicate number and desired extension
+    naam = naam + '_' + replicate + '.' + extension
+    
+    return naam
 
 #get results to be saved
 def parse_history(h, phenotypes, trait, config_dict, max_val_pearson, nparams, replicate):
