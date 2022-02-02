@@ -11,7 +11,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Input
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Conv2D, MaxPooling2D
-from keras.regularizers import l1_l2
+from keras.regularizers import l1, l2, l1_l2
 
 #creates a plot with the required metric from the object returned 
 #by .fit() function. If an outfile if passed, the figure is saved
