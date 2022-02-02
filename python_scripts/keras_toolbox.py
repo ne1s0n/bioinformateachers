@@ -58,26 +58,12 @@ def instantiate_network(config_dict):
 	#getting layer regularizers
 	L1L2 = get_regularizers(regularizer_l1, regularizer_l2)
 	
-	#building the model
-	model = Sequential()
-	
 	#step counter for the maxpooling layers
 	mp_cnt = 0
 	
-	#first node is different, because it requires input shape
-	model.add(Conv2D(
-		conv_layers.pop(0), 
-		kernel_size=conv_filter,
-		activation='relu',
-		input_shape=input_shape, 
-		padding=conv_padding,
-		kernel_regularizer=L1L2
-	))
-	mp_cnt += 1
-	if mp_cnt >= pool_step:
-		model.add(MaxPooling2D(pool_size=pool_filter))
-		mp_cnt = 0
-	model.add(Dropout(drop_rate))
+	#building the model
+	model = Sequential()
+	model.add(Input(shape = config['input_shape']))
 
 	#convolutionary section
 	for nodes in conv_layers:
@@ -100,6 +86,10 @@ def instantiate_network(config_dict):
 	#dense section
 	for nodes in dense_layers:
 		model.add(Dense(nodes, activation='relu', kernel_regularizer=L1L2))
+		mp_cnt += 1
+		if mp_cnt >= pool_step:
+			model.add(MaxPooling2D(pool_size=pool_filter))
+			mp_cnt = 0
 		model.add(Dropout(drop_rate))
 	
 	#final output
