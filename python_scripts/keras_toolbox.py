@@ -8,10 +8,10 @@ Created on Thu Jan 21 10:14:30 2022
 
 from matplotlib import pyplot
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Dense, Dropout, Activation, Flatten, Input
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Conv2D, MaxPooling2D
-from keras.regularizers import l1_l2
+from keras.regularizers import l1, l2, l1_l2
 
 #creates a plot with the required metric from the object returned 
 #by .fit() function. If an outfile if passed, the figure is saved
@@ -45,7 +45,7 @@ def instantiate_network(config_dict):
 	
 	#cleanup of the config dictionary, so that we use local variables
 	input_shape  = config_dict['input_shape']
-	conv_layers  = config_dict.get('conv_layers', [32, 64]).copy() #copied so that we can pop
+	conv_layers  = config_dict.get('conv_layers', [32, 64])
 	conv_filter  = config_dict.get('conv_filter', (3, 3))
 	conv_padding = config_dict.get('conv_padding', 'same')
 	dense_layers = config_dict.get('dense_layers', [128])
@@ -58,26 +58,12 @@ def instantiate_network(config_dict):
 	#getting layer regularizers
 	L1L2 = get_regularizers(regularizer_l1, regularizer_l2)
 	
-	#building the model
-	model = Sequential()
-	
 	#step counter for the maxpooling layers
 	mp_cnt = 0
 	
-	#first node is different, because it requires input shape
-	model.add(Conv2D(
-		conv_layers.pop(0), 
-		kernel_size=conv_filter,
-		activation='relu',
-		input_shape=input_shape, 
-		padding=conv_padding,
-		kernel_regularizer=L1L2
-	))
-	mp_cnt += 1
-	if mp_cnt >= pool_step:
-		model.add(MaxPooling2D(pool_size=pool_filter))
-		mp_cnt = 0
-	model.add(Dropout(drop_rate))
+	#building the model
+	model = Sequential()
+	model.add(Input(shape = input_shape))
 
 	#convolutionary section
 	for nodes in conv_layers:
@@ -100,6 +86,10 @@ def instantiate_network(config_dict):
 	#dense section
 	for nodes in dense_layers:
 		model.add(Dense(nodes, activation='relu', kernel_regularizer=L1L2))
+		mp_cnt += 1
+		if mp_cnt >= pool_step:
+			model.add(MaxPooling2D(pool_size=pool_filter))
+			mp_cnt = 0
 		model.add(Dropout(drop_rate))
 	
 	#final output
@@ -107,15 +97,15 @@ def instantiate_network(config_dict):
 		
 	return(model)
 
-def get_regularizers(l1, l2):
-	if (l1 is not None) and (l2 is not None):
-		#both L1 and L2 active
-		return l1_l2(l1=l1, l2=l2)
+def get_regularizers(regularizer_l1, regularizer_l2):
+	if (regularizer_l1 is not None) and (regularizer_l2 is not None):
+		#both L1 and L2 regularization are active
+		return l1_l2(l1=regularizer_l1, l2=regularizer_l2)
 		
-	if l1 is not None :
+	if regularizer_l1 is not None :
 		#L1 only
-		return l1(l1=l1)
+		return l1(l1=regularizer_l1)
 		
-	if l2 is not None :
+	if regularizer_l2 is not None :
 		#L2 only
-		return l2(l2=l2)
+		return l2(l2=regularizer_l2)
