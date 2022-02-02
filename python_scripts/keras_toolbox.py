@@ -17,7 +17,8 @@ from keras.regularizers import l1, l2, l1_l2
 #by .fit() function. If an outfile if passed, the figure is saved
 #before invoking pyplot .show()
 #If a title is not present we report the metric 
-def plot_loss_history(h, metric = 'loss', outfile = None, title = None):
+def plot_loss_history(h, metric = 'loss', outfile = None, title = None, figsize = (10, 20)):
+	pyplot.figure(figsize=figsize)
 	pyplot.plot(h.history[metric], label = 'Train ' + metric)
 	pyplot.plot(h.history['val_' + metric], label = 'Validation ' + metric)
 	pyplot.xlabel('Epochs')
@@ -25,7 +26,6 @@ def plot_loss_history(h, metric = 'loss', outfile = None, title = None):
 		title = metric
 	pyplot.title(title)
 	pyplot.legend()
-
 	if outfile is not None:
 		pyplot.savefig(outfile)
 	pyplot.show()
