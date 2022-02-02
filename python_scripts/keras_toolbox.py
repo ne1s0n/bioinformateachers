@@ -102,6 +102,6 @@ def instantiate_network(config_dict):
 		model.add(Dropout(drop_rate))
 	
 	#final output
-	model.add(Dense(1, activation='linear', kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
+	model.add(Dense(1, activation='linear', kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
 		
 	return(model)
