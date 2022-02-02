@@ -10,6 +10,8 @@ from matplotlib import pyplot
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Conv2D, MaxPooling2D
+from keras.regularizers import l1_l2
 
 #creates a plot with the required metric from the object returned 
 #by .fit() function. If an outfile if passed, the figure is saved
@@ -68,7 +70,7 @@ def instantiate_network(config_dict):
 		activation='relu',
 		input_shape=input_shape, 
 		padding=conv_padding,
-		kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)
+		kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)
 	))
 	mp_cnt += 1
 	if mp_cnt >= pool_step:
@@ -83,7 +85,7 @@ def instantiate_network(config_dict):
 			conv_filter, 
 			activation='relu', 
 			padding=conv_padding, 
-			kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)
+			kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)
 		))
 		mp_cnt += 1
 		if mp_cnt >= pool_step:
@@ -96,7 +98,7 @@ def instantiate_network(config_dict):
 	
 	#dense section
 	for nodes in dense_layers:
-		model.add(Dense(nodes, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
+		model.add(Dense(nodes, activation='relu', kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
 		model.add(Dropout(drop_rate))
 	
 	#final output
