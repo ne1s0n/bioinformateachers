@@ -86,4 +86,5 @@ def writeout_results(res, filename):
         else:
             os.makedirs(os.path.dirname(filename))
             res.to_csv(filename, mode='w', header=True)
-        return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
+            return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
+
