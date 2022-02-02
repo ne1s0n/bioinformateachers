@@ -63,7 +63,7 @@ def instantiate_network(config_dict):
 	
 	#building the model
 	model = Sequential()
-	model.add(Input(shape = config['input_shape']))
+	model.add(Input(shape = input_shape))
 
 	#convolutionary section
 	for nodes in conv_layers:
