@@ -79,6 +79,11 @@ def writeout_results(res, filename):
         return "File '{}' already exists, appending results to it".format(filename)
     
     else:
-        os.makedirs(os.path.dirname(filename))
-        res.to_csv(filename, mode='w', header=True)
-        return "Creating file '{}' and writing results to it".format(filename)
+        basedir = os.path.dirname(filename)
+        if os.path.isdir(basedir):
+            res.to_csv(filename, mode='w', header=True)
+            return "Creating file '{}' and writing results to it".format(os.path.basename(filename))
+        else:
+            os.makedirs(os.path.dirname(filename))
+            res.to_csv(filename, mode='w', header=True)
+        return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
