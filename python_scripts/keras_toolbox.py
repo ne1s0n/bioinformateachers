@@ -37,6 +37,9 @@ def plot_loss_history(h, metric = 'loss', outfile = None):
 # - pool_filter = (2,2)
 # - pool_step = 2
 # - drop_rate = 0.25
+# - regularizer_l1 = 1e-5
+# - regularizer_l2 = 1e-4
+
 def instantiate_network(config_dict):
 	
 	#cleanup of the config dictionary, so that we use local variables
@@ -48,6 +51,9 @@ def instantiate_network(config_dict):
 	pool_filter  = config_dict.get('pool_filter', (2,2))
 	pool_step    = config_dict.get('pool_step', 2)
 	drop_rate    = config_dict.get('drop_rate', 0.25)
+	regularizer_l1 = config_dict.get('regularizer_l1', 1e-5)
+	regularizer_l2 = config_dict.get('regularizer_l2', 1e-4)
+	
 	
 	#building the model
 	model = Sequential()
@@ -61,14 +67,24 @@ def instantiate_network(config_dict):
 		kernel_size=conv_filter,
 		activation='relu',
 		input_shape=input_shape, 
-		padding=conv_padding
+		padding=conv_padding,
+		kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)
 	))
 	mp_cnt += 1
+	if mp_cnt >= pool_step:
+		model.add(MaxPooling2D(pool_size=pool_filter))
+		mp_cnt = 0
 	model.add(Dropout(drop_rate))
 
 	#convolutionary section
 	for nodes in conv_layers:
-		model.add(Conv2D(nodes, conv_filter, activation='relu', padding=conv_padding))
+		model.add(Conv2D(
+			nodes, 
+			conv_filter, 
+			activation='relu', 
+			padding=conv_padding, 
+			kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)
+		))
 		mp_cnt += 1
 		if mp_cnt >= pool_step:
 			model.add(MaxPooling2D(pool_size=pool_filter))
@@ -80,10 +96,10 @@ def instantiate_network(config_dict):
 	
 	#dense section
 	for nodes in dense_layers:
-		model.add(Dense(nodes, activation='relu'))
+		model.add(Dense(nodes, activation='relu', kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
 		model.add(Dropout(drop_rate))
 	
 	#final output
-	model.add(Dense(1, activation='linear'))
+	model.add(Dense(1, activation='linear', kernel_regularizer=regularizers.l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
 		
 	return(model)
