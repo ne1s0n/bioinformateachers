@@ -45,7 +45,7 @@ def instantiate_network(config_dict):
 	
 	#cleanup of the config dictionary, so that we use local variables
 	input_shape  = config_dict['input_shape']
-	conv_layers  = config_dict.get('conv_layers', [32, 64]).copy() #copied so that we can pop
+	conv_layers  = config_dict.get('conv_layers', [32, 64])
 	conv_filter  = config_dict.get('conv_filter', (3, 3))
 	conv_padding = config_dict.get('conv_padding', 'same')
 	dense_layers = config_dict.get('dense_layers', [128])
@@ -97,15 +97,15 @@ def instantiate_network(config_dict):
 		
 	return(model)
 
-def get_regularizers(l1, l2):
-	if (l1 is not None) and (l2 is not None):
-		#both L1 and L2 active
-		return l1_l2(l1=l1, l2=l2)
+def get_regularizers(regularizer_l1, regularizer_l2):
+	if (regularizer_l1 is not None) and (regularizer_l2 is not None):
+		#both L1 and L2 regularization are active
+		return l1_l2(l1=regularizer_l1, l2=regularizer_l2)
 		
-	if l1 is not None :
+	if regularizer_l1 is not None :
 		#L1 only
-		return l1(l1=l1)
+		return l1(l1=regularizer_l1)
 		
-	if l2 is not None :
+	if regularizer_l2 is not None :
 		#L2 only
-		return l2(l2=l2)
+		return l2(l2=regularizer_l2)
