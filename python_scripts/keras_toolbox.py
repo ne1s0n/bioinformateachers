@@ -39,9 +39,8 @@ def plot_loss_history(h, metric = 'loss', outfile = None):
 # - pool_filter = (2,2)
 # - pool_step = 2
 # - drop_rate = 0.25
-# - regularizer_l1 = 1e-5
-# - regularizer_l2 = 1e-4
-
+# - regularizer_l1 = 0.01 (None to turn off)
+# - regularizer_l2 = 0.01 (None to turn off)
 def instantiate_network(config_dict):
 	
 	#cleanup of the config dictionary, so that we use local variables
@@ -53,9 +52,11 @@ def instantiate_network(config_dict):
 	pool_filter  = config_dict.get('pool_filter', (2,2))
 	pool_step    = config_dict.get('pool_step', 2)
 	drop_rate    = config_dict.get('drop_rate', 0.25)
-	regularizer_l1 = config_dict.get('regularizer_l1', 1e-5)
-	regularizer_l2 = config_dict.get('regularizer_l2', 1e-4)
+	regularizer_l1 = config_dict.get('regularizer_l1', 0.01)
+	regularizer_l2 = config_dict.get('regularizer_l2', 0.01)
 	
+	#getting layer regularizers
+	L1L2 = get_regularizers(regularizer_l1, regularizer_l2)
 	
 	#building the model
 	model = Sequential()
@@ -70,7 +71,7 @@ def instantiate_network(config_dict):
 		activation='relu',
 		input_shape=input_shape, 
 		padding=conv_padding,
-		kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)
+		kernel_regularizer=L1L2
 	))
 	mp_cnt += 1
 	if mp_cnt >= pool_step:
@@ -85,7 +86,7 @@ def instantiate_network(config_dict):
 			conv_filter, 
 			activation='relu', 
 			padding=conv_padding, 
-			kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)
+			kernel_regularizer=L1L2
 		))
 		mp_cnt += 1
 		if mp_cnt >= pool_step:
@@ -98,10 +99,23 @@ def instantiate_network(config_dict):
 	
 	#dense section
 	for nodes in dense_layers:
-		model.add(Dense(nodes, activation='relu', kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
+		model.add(Dense(nodes, activation='relu', kernel_regularizer=L1L2))
 		model.add(Dropout(drop_rate))
 	
 	#final output
-	model.add(Dense(1, activation='linear', kernel_regularizer=l1_l2(l1=regularizer_l1, l2=regularizer_l2)))
+	model.add(Dense(1, activation='linear', kernel_regularizer=L1L2))
 		
 	return(model)
+
+def get_regularizers(l1, l2):
+	if (l1 is not None) and (l2 is not None):
+		#both L1 and L2 active
+		return l1_l2(l1=l1, l2=l2)
+		
+	if l1 is not None :
+		#L1 only
+		return l1(l1=l1)
+		
+	if l2 is not None :
+		#L2 only
+		return l2(l2=l2)
