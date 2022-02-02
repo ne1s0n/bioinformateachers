@@ -8,7 +8,7 @@ Created on Thu Jan 21 10:14:30 2022
 
 from matplotlib import pyplot
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Dense, Dropout, Activation, Flatten, Input
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Conv2D, MaxPooling2D
 from keras.regularizers import l1_l2
