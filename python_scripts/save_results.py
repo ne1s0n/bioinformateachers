@@ -10,8 +10,8 @@ Created on Mon Jan 24 11:50:14 2022
 
 import os
 import re
-import pandas as pd
 import json
+import pandas as pd
 
 def make_file_names(trait,config_dict,replicate,extension='png'):
     
@@ -61,7 +61,7 @@ def parse_history(h, phenotypes, trait, config_dict, max_val_pearson, nparams, r
     #temp['conv_padding'] = config_dict['conv_padding']
     
     #total config in a single column
-    temp['config'] = json.dump(config_dict)
+    temp['config'] = json.dumps(config_dict)
     
     column_names = ["trait","sample_size",
                     "validation_split",
