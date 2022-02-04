@@ -51,7 +51,7 @@ def parse_results(filepath, outfilepath = None):
     
     #should we save a csv?
     if outfilepath is not None:
-		res.to_csv(outfilepath)
+        res.to_csv(outfilepath)
     
     print(" - returning dataframe of results")
     return res
