@@ -15,7 +15,8 @@ import json
 import pandas as pd
 
 #%% function to read results and return a Pandas dataframe for further analysis
-def parse_results(filepath):
+#%% optionally if an outiflepath is passed the dataframe is saved as csv
+def parse_results(filepath, outfilepath = None):
     
     basename = os.path.basename(filepath)
     basefolder = os.path.dirname(filepath)
@@ -48,8 +49,11 @@ def parse_results(filepath):
     temp = temp.drop('config', axis=1)
     res = pd.concat([temp.reset_index(drop=True), pd.DataFrame(config_res)], axis=1)
     
-    print(" - returning dataframe of results")
+    #should we save a csv?
+    if outfilepath is not None:
+		res.to_csv(outfilepath)
     
+    print(" - returning dataframe of results")
     return res
 
 
