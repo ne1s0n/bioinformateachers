@@ -86,10 +86,6 @@ def instantiate_network(config_dict):
 	#dense section
 	for nodes in dense_layers:
 		model.add(Dense(nodes, activation='relu', kernel_regularizer=L1L2))
-		mp_cnt += 1
-		if mp_cnt >= pool_step:
-			model.add(MaxPooling2D(pool_size=pool_filter))
-			mp_cnt = 0
 		model.add(Dropout(drop_rate))
 	
 	#final output
