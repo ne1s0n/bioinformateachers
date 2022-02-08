@@ -14,7 +14,7 @@ import re
 import json
 import pandas as pd
 
-#%% function to read results and return a Pandas dataframe for further analysis
+#%% function to parse results from keras
 def parse_results(filepath):
     
     basename = os.path.basename(filepath)
@@ -53,3 +53,8 @@ def parse_results(filepath):
     return res
 
 
+#%%
+fname = "/home/filippo/Documents/deep_learning_for_breeding/results/results_temp.csv"
+res = parse_results(fname)
+avg = res.groupby(['num_epochs'])['val_pearson'].mean()
+print(avg)
