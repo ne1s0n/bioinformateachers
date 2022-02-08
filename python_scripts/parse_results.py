@@ -58,7 +58,7 @@ def parse_results(filepath, outfilepath = None):
 
 
 #%%
-fname = "/home/filippo/Documents/deep_learning_for_breeding/results/results_temp.csv"
-res = parse_results(fname)
-avg = res.groupby(['num_epochs'])['val_pearson'].mean()
-print(avg)
+#fname = "/home/filippo/Documents/deep_learning_for_breeding/results/results_temp.csv"
+#res = parse_results(fname)
+#avg = res.groupby(['num_epochs'])['val_pearson'].mean()
+#print(avg)
