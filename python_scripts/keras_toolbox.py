@@ -15,19 +15,19 @@ from keras.regularizers import l1, l2, l1_l2
 
 #creates a plot with the required metric from the object returned 
 #by .fit() function. If an outfile if passed, the figure is saved
-#before invoking pyplot .show() 
-def plot_loss_history(h, metric = 'loss', outfile = None):
+#before invoking pyplot .show()
+#If a title is not present we report the metric 
+def plot_loss_history(h, metric = 'loss', outfile = None, title = None):
 	pyplot.plot(h.history[metric], label = 'Train ' + metric)
 	pyplot.plot(h.history['val_' + metric], label = 'Validation ' + metric)
 	pyplot.xlabel('Epochs')
-	pyplot.title(metric)
+	if title is None:
+		title = metric
+	pyplot.title(title)
 	pyplot.legend()
-
 	if outfile is not None:
-		pyplot.savefig(outfile)
+		pyplot.savefig(outfile, bbox_inches='tight')
 	pyplot.show()
-	
-	
 	
 #instantiate a network, which will then need to be compiled
 #default parameters:
@@ -86,10 +86,6 @@ def instantiate_network(config_dict):
 	#dense section
 	for nodes in dense_layers:
 		model.add(Dense(nodes, activation='relu', kernel_regularizer=L1L2))
-		mp_cnt += 1
-		if mp_cnt >= pool_step:
-			model.add(MaxPooling2D(pool_size=pool_filter))
-			mp_cnt = 0
 		model.add(Dropout(drop_rate))
 	
 	#final output
