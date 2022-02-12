@@ -93,6 +93,8 @@ def instantiate_network(config_dict):
 		
 	return(model)
 
+#returns a node regularizer based on the passed L1/L2 parameters, supports
+#one or zero Nones
 def get_regularizers(regularizer_l1, regularizer_l2):
 	if (regularizer_l1 is not None) and (regularizer_l2 is not None):
 		#both L1 and L2 regularization are active
