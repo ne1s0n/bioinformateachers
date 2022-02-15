@@ -22,8 +22,11 @@ def train_val_split(x, y, validation_split):
 	
 	#and we are done
 	return(train_x, train_y, val_x, val_y)
-	
-def add_normal_noise(x, y, reps=1, mu=0, sigma=0.1):
+
+#data augmentation on y, adding normal noise. The number of
+#times the whole dataset is copied is regulated by "reps".
+#The original dataset is included, untouched	
+def augment_add_normal_noise(x, y, reps=1, mu=0, sigma=0.1):
 	result_x = x
 	result_y = y
 	for i in range(reps):
