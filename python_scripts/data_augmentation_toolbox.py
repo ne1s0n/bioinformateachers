@@ -22,3 +22,17 @@ def train_val_split(x, y, validation_split):
 	
 	#and we are done
 	return(train_x, train_y, val_x, val_y)
+	
+def add_normal_noise(x, y, reps=1, mu=0, sigma=0.1):
+	result_x = x
+	result_y = y
+	for i in range(reps):
+		#adding the required noise
+		y_now = y.copy()
+		for j in range(len(y)):
+			y_now[j] = y_now[j] + random.gauss(mu, sigma)
+		
+		#putting all together
+		result_x = np.concatenate((result_x, x))
+		result_y = np.concatenate((result_y, y_now))
+	return(result_x, result_y)
