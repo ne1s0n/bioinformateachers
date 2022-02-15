@@ -39,3 +39,6 @@ def augment_add_normal_noise(x, y, reps=1, mu=0, sigma=0.1):
 		result_x = np.concatenate((result_x, x))
 		result_y = np.concatenate((result_y, y_now))
 	return(result_x, result_y)
+
+def merge_history(train_set_history, y, y_hat, past_merged_history = None):
+	return(None)
