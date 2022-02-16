@@ -14,11 +14,15 @@ def train_val_split(x, y, validation_split):
 	sel_val   = random.sample(items, n)
 	sel_train = list(set(items) - set(sel_val))
 	
-	#use it on x and y, directly and reverrse
+	#use it on x and y, directly and reverse
 	train_x = x[sel_train]
 	train_y = [y[i] for i in sel_train]
 	val_x   = x[sel_val]
 	val_y   = [y[i] for i in sel_val]
+	
+	#all Ys should be a numpy array
+	train_y = np.array(train_y)
+	val_y = np.array(val_y)
 	
 	#and we are done
 	return(train_x, train_y, val_x, val_y)
