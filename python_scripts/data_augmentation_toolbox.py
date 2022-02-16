@@ -55,9 +55,11 @@ def merge_history(train_set_history, val_set_evaluation, metrics, past_merged_hi
 	#support class, in case we don't have a past history to enlarge
 	class MockTrainingHistory:
 		history = {}
+		params = {}
 		
 	if past_merged_history is None:
 		past_merged_history = MockTrainingHistory()
+		past_merged_history.params = train_set_history.params.copy()
 		
 	#at this point all new data should be added to past_merged_history
 	for i in range(len(metrics)):		
