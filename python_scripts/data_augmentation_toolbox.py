@@ -46,17 +46,11 @@ def augment_add_normal_noise(x, y, reps=1, mu=0, sigma=0.1, mu_x=None, sigma_x =
 		
 		#should we add noise to y?
 		if mu is not None:
-			#for j in range(len(y)):
-		#		y_now[j] = y_now[j] + random.gauss(mu, sigma)
 			y_now = y + mu + sigma * rng.standard_normal(size = len(y))
 				
 		#should we add noise to x?
 		if mu_x is not None:
 			x_now = x + mu_x + sigma_x * rng.standard_normal(size = x.shape)
-
-			#for i in range(x.shape[0]):
-		#		for j in range(x.shape[1]):
-	#				x_now[i,j] = x_now[i,j]+ random.gauss(mu_x, sigma_x)
 		
 		#putting all together
 		result_x = np.concatenate((result_x, x_now))
