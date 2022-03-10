@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from numpy.random import default_rng
 
 #split the data in two pieces of the required proportion (x is split
 #along the first axis)
@@ -27,20 +28,38 @@ def train_val_split(x, y, validation_split):
 	#and we are done
 	return(train_x, train_y, val_x, val_y)
 
-#data augmentation on y, adding normal noise. The number of
+#data augmentation on either x, y, or both. Adding normal noise. The selection of target
+#data to be augmented is done via sigma, mu (for y) or sigma_x, mu_x
+#(for x). If set to None the augmentation on that part of data is 
+#turned off
+#The number of
 #times the whole dataset is copied is regulated by "reps".
 #The original dataset is included, untouched	
-def augment_add_normal_noise(x, y, reps=1, mu=0, sigma=0.1):
+def augment_add_normal_noise(x, y, reps=1, mu=0, sigma=0.1, mu_x=None, sigma_x = None):
+	rng = default_rng()
 	result_x = x
 	result_y = y
 	for i in range(reps):
 		#adding the required noise
+		x_now = x.copy()
 		y_now = y.copy()
-		for j in range(len(y)):
-			y_now[j] = y_now[j] + random.gauss(mu, sigma)
+		
+		#should we add noise to y?
+		if mu is not None:
+			#for j in range(len(y)):
+		#		y_now[j] = y_now[j] + random.gauss(mu, sigma)
+			y_now = y + mu + sigma * rng.standard_normal(size = len(y))
+				
+		#should we add noise to x?
+		if mu_x is not None:
+			x_now = x + mu_x + sigma_x * rng.standard_normal(size = x.shape)
+
+			#for i in range(x.shape[0]):
+		#		for j in range(x.shape[1]):
+	#				x_now[i,j] = x_now[i,j]+ random.gauss(mu_x, sigma_x)
 		
 		#putting all together
-		result_x = np.concatenate((result_x, x))
+		result_x = np.concatenate((result_x, x_now))
 		result_y = np.concatenate((result_y, y_now))
 	return(result_x, result_y)
 
