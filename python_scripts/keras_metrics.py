@@ -6,8 +6,7 @@ Created on Thu Jan 20 17:14:30 2022
 
 """ A collection of custom metrics for keras """
 
-import math
-import numpy as np
+import tensorflow as tf
 import keras.backend as KB
 
 #pearson's correlation
@@ -36,15 +35,16 @@ def ndcg(y, y_hat, k=0.20):
     n = len(y) # number of predicted examples
     nk = round(k*n) ## select the k top examples
     print(nk)
-    y_inds = y.argsort()
-    y_sort_y = y[y_inds]
-    y_hat_inds = y_hat.argsort()
-    y_sort_y_hat = y[y_hat_inds]
+    y_inds = tf.argsort(y)
+    y_sort_y = tf.gather(y, y_inds)
+    y_hat_inds = tf.argsort(y_hat)
+    y_sort_y_hat = tf.gather(y, y_hat_inds)
     
     temp = 0
     for i in range(nk):
         ix = i+1
-        d = 1/(KB.log(ix)+1) ## should be log2 !! (TODO: find if with keras.backend this is possible)
+        ix_tens = tf.convert_to_tensor(ix, dtype=tf.float32)
+        d = 1/(KB.log(ix_tens)+1) ## should be log2 !! (TODO: find if with keras.backend this is possible)
         num = KB.sum(y_sort_y_hat[0:ix])*d
         den = KB.sum(y_sort_y[0:ix])*d
 
