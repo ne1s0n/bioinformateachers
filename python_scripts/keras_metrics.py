@@ -40,14 +40,14 @@ def ndcg(y, y_hat, k=0.20):
     y_hat_inds = tf.argsort(y_hat)
     y_sort_y_hat = tf.gather(y, y_hat_inds)
     
-    temp = 0
-    for i in range(nk):
-        ix = i+1
-        ix_tens = tf.convert_to_tensor(ix, dtype=tf.float32)
-        d = 1/(KB.log(ix_tens)+1) ## should be log2 !! (TODO: find if with keras.backend this is possible)
-        num = KB.sum(y_sort_y_hat[0:ix])*d
-        den = KB.sum(y_sort_y[0:ix])*d
+    seq = tf.range(1.0, nk+1)
+    d = KB.log(seq+1)
+    k2 = KB.log(2.0)
+    d = k2/d ## 1/(d/k2) --> 1* k2/d
+    
+    num = KB.sum(y_sort_y_hat[0:nk]*d)
+    den = KB.sum(y_sort_y[0:nk]*d)
 
-        temp = (i*temp + num/den ) / (ix)
+    temp = num/den
     
     return(temp)
