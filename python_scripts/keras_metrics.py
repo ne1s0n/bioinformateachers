@@ -33,12 +33,12 @@ def ndcg(y, y_hat, k=0.20):
     
     print('the selected value for k is {}'.format(k))
     n = len(y) # number of predicted examples
-    nk = round(k*float(n))
+    nk = round(k*n)
     ## select the k top examples
     print(nk)
-    y_inds = tf.argsort(y)
+    y_inds = tf.argsort(y, direction='DESCENDING')
     y_sort_y = tf.gather(y, y_inds)
-    y_hat_inds = tf.argsort(y_hat)
+    y_hat_inds = tf.argsort(y_hat, direction='DESCENDING')
     y_sort_y_hat = tf.gather(y, y_hat_inds)
     
     seq = tf.range(1.0, nk+1)
