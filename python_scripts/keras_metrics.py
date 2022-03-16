@@ -29,16 +29,14 @@ def rmse(x, y):
   return KB.mean(KB.sqrt((x - y) ** 2))
 
 ## NDCG: normalised discounted cumulative gain
-def ndcg(y, y_hat):
+def ndcg(y, y_hat, k):
     
-    #k = tf.convert_to_tensor([0.20])
-    k = 0.20
-    print('the selected value for k is {}'.format(k))
-    #n = tf.convert_to_tensor(len(y)) # number of predicted examples
-    n = len(y)
-    nk = round(k*n)
+    k = tf.convert_to_tensor(k, dtype=tf.float32)
+    n = tf.convert_to_tensor(len(y), dtype=tf.float32) # number of predicted examples
     ## select the k top examples
-    print(nk)
+    nk = tf.math.round(k*n)
+    nk_int = int(nk.numpy())
+    
     y_inds = tf.argsort(y, direction='DESCENDING')
     y_sort_y = tf.gather(y, y_inds)
     y_hat_inds = tf.argsort(y_hat, direction='DESCENDING')
@@ -49,9 +47,23 @@ def ndcg(y, y_hat):
     k2 = KB.log(2.0)
     d = k2/d ## 1/(d/k2) --> 1* k2/d
     
-    num = KB.sum(y_sort_y_hat[0:nk]*d)
-    den = KB.sum(y_sort_y[0:nk]*d)
+    num = KB.sum(y_sort_y_hat[0:nk_int]*d)
+    den = KB.sum(y_sort_y[0:nk_int]*d)
 
     temp = num/den
     
     return(temp)
+
+def ndcg_25(y, yhat):
+    
+    return(ndcg(y, yhat, 0.25))
+    
+
+def ndcg_50(y, yhat):
+    
+    return(ndcg(y, yhat, 0.50))
+
+def ndcg_100(y, yhat):
+    
+    return(ndcg(y, yhat, 1.0))
+    
