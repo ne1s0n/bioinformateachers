@@ -11,6 +11,7 @@ Created on Mon Jan 24 11:50:14 2022
 import os
 import re
 import json
+import numpy as np
 import pandas as pd
 
 def make_file_names(trait,config_dict,replicate,extension='png'):
@@ -88,3 +89,26 @@ def writeout_results(res, filename):
             res.to_csv(filename, mode='w', header=True)
             return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
 
+def get_predictions(model, val_x, val_y, config):
+    
+    ## calculate predictions and make DF with y and y_hat
+    predictions = model.predict(val_x)
+    predictions = np.concatenate(predictions, axis=0 )
+    temp = pd.DataFrame({'y':val_y, 'y_hat':predictions})
+    
+    print('dataframe with {} predictions created'.format(len(temp)))
+    
+    ## make dataframe with config options
+    d = dict([[k,[str(v)]] for k,v in config.items()])
+    df = pd.DataFrame.from_dict(d)
+    
+    ## replicate configs for number of rows (predictions)
+    df = pd.concat([df]*len(temp), ignore_index=True)
+    
+    ## combine y, y_hat and configs into one dataframe
+    preds = pd.concat([temp, df], axis=1)
+    
+    return preds
+    
+
+    
