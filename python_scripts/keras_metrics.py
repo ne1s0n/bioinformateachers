@@ -29,11 +29,13 @@ def rmse(x, y):
   return KB.mean(KB.sqrt((x - y) ** 2))
 
 ## NDCG: normalised discounted cumulative gain
-def ndcg(y, y_hat, k):
+def ndcg(y, y_hat):
     
+    #k = tf.convert_to_tensor([0.20])
     k = 0.20
     print('the selected value for k is {}'.format(k))
-    n = len(y) # number of predicted examples
+    #n = tf.convert_to_tensor(len(y)) # number of predicted examples
+    n = len(y)
     nk = round(k*n)
     ## select the k top examples
     print(nk)
