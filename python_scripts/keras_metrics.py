@@ -29,8 +29,9 @@ def rmse(x, y):
   return KB.mean(KB.sqrt((x - y) ** 2))
 
 ## NDCG: normalised discounted cumulative gain
-def ndcg(y, y_hat, k=0.20):
+def ndcg(y, y_hat, k):
     
+    k = 0.20
     print('the selected value for k is {}'.format(k))
     n = len(y) # number of predicted examples
     nk = round(k*n)
