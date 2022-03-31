@@ -50,6 +50,9 @@ def ndcg(y, y_hat, k):
     k2 = KB.log(2.0)
     d = k2/d ## 1/(d/k2) --> 1* k2/d
     
+    print('rank of tensor y', tf.rank(y))
+    print('rank of tensor y_inds', tf.rank(y_inds))
+    
     ## numpy array syntax: does not work with Keras eager execution
     ## num = KB.sum(y_sort_y_hat[0:nk_int]*d)
     ## den = KB.sum(y_sort_y[0:nk_int]*d)
