@@ -57,8 +57,8 @@ def ndcg(y, y_hat, k):
     ## tensor flow slice syntax: for Keras with eager execution
     sliced_y_hat = tf.slice(y_sort_y_hat, [0], [nk_int])
     sliced_y = tf.slice(y_sort_y, [0], [nk_int])
-    sliced_y = tf.reshape(sliced_y, [1])
-    print(tf.shape(sliced_y))
+    print('shape of sliced tensor', tf.shape(sliced_y))
+    print('rank of sliced tensor', tf.rank(sliced_y))
     print(sliced_y_hat)
     print(sliced_y)
     
