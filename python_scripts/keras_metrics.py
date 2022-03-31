@@ -57,7 +57,8 @@ def ndcg(y, y_hat, k):
     ## tensor flow slice syntax: for Keras with eager execution
     sliced_y_hat = tf.slice(y_sort_y_hat, [0], [nk_int])
     sliced_y = tf.slice(y_sort_y, [0], [nk_int])
-    print(sliced_y.shape)
+    sliced_y = tf.reshape(sliced_y, [len(sliced_y)])
+    print(tf.shape(sliced_y))
     
     num = KB.sum(sliced_y_hat*d)
     den = KB.sum(sliced_y*d)
