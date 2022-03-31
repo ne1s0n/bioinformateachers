@@ -54,13 +54,12 @@ def ndcg(y, y_hat, k):
     ## num = KB.sum(y_sort_y_hat[0:nk_int]*d)
     ## den = KB.sum(y_sort_y[0:nk_int]*d)
     
+    print('rank of sorted tensor num', tf.rank(y_sort_y_hat))
+    print('rank of sorted tensor den', tf.rank(y_sort_y))
+    
     ## tensor flow slice syntax: for Keras with eager execution
     sliced_y_hat = tf.slice(y_sort_y_hat, [0], [nk_int])
     sliced_y = tf.slice(y_sort_y, [0], [nk_int])
-    print('shape of sliced tensor', tf.shape(sliced_y))
-    print('rank of sliced tensor', tf.rank(sliced_y))
-    print(sliced_y_hat)
-    print(sliced_y)
     
     num = KB.sum(sliced_y_hat*d)
     den = KB.sum(sliced_y*d)
