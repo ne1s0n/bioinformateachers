@@ -51,7 +51,9 @@ def ndcg(y, y_hat, k):
     d = k2/d ## 1/(d/k2) --> 1* k2/d
     
     print('shape of tensor y', tf.shape(y))
+    print(y)
     print('shape of tensor y_inds', tf.shape(y_inds))
+    print(y_inds)
     
     ## numpy array syntax: does not work with Keras eager execution
     ## num = KB.sum(y_sort_y_hat[0:nk_int]*d)
