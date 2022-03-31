@@ -58,7 +58,9 @@ def ndcg(y, y_hat, k):
     ## den = KB.sum(y_sort_y[0:nk_int]*d)
     
     print('shape of sorted tensor num', tf.shape(y_sort_y_hat))
+    print('shape of sorted tensor num', y_sort_y_hat.get_shape())
     print('shape of sorted tensor den', tf.shape(y_sort_y))
+    print('shape of sorted tensor den', y_sort_y.get_shape())
     
     ## tensor flow slice syntax: for Keras with eager execution
     sliced_y_hat = tf.slice(y_sort_y_hat, [0], [nk_int])
