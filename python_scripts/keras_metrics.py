@@ -50,15 +50,15 @@ def ndcg(y, y_hat, k):
     k2 = KB.log(2.0)
     d = k2/d ## 1/(d/k2) --> 1* k2/d
     
-    print('rank of tensor y', tf.rank(y))
-    print('rank of tensor y_inds', tf.rank(y_inds))
+    print('shape of tensor y', tf.shape(y))
+    print('shape of tensor y_inds', tf.shape(y_inds))
     
     ## numpy array syntax: does not work with Keras eager execution
     ## num = KB.sum(y_sort_y_hat[0:nk_int]*d)
     ## den = KB.sum(y_sort_y[0:nk_int]*d)
     
-    print('rank of sorted tensor num', tf.rank(y_sort_y_hat))
-    print('rank of sorted tensor den', tf.rank(y_sort_y))
+    print('shape of sorted tensor num', tf.shape(y_sort_y_hat))
+    print('shape of sorted tensor den', tf.shape(y_sort_y))
     
     ## tensor flow slice syntax: for Keras with eager execution
     sliced_y_hat = tf.slice(y_sort_y_hat, [0], [nk_int])
