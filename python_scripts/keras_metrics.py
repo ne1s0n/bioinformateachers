@@ -31,13 +31,14 @@ def rmse(x, y):
 ## NDCG: normalised discounted cumulative gain
 def ndcg(y, y_hat, k):
     
-    n = len(y)
+    #n = len(y)
     kt = tf.convert_to_tensor(k, dtype=tf.float32)
     nt = tf.convert_to_tensor(len(y), dtype=tf.int32) # number of predicted examples
     nt = tf.cast(nt, dtype=tf.float32)
     ## select the k top examples
     nk = tf.math.round(kt*nt)
-    nk_int = round(n*k)
+    #nk_int = round(n*k)
+    nk_int = tf.cast(nk, dtype=tf.int32)
     
     y_inds = tf.argsort(y, direction='DESCENDING')
     y_sort_y = tf.gather(y, y_inds)
