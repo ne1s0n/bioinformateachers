@@ -51,7 +51,7 @@ def ndcg(y, y_hat, k):
     d = k2/d ## 1/(d/k2) --> 1* k2/d
     
     print('shape of tensor y', tf.shape(y))
-    tf.print('tensor:',y)
+    KB.print_tensor(y, message='tensor y = ')
     print('shape of tensor y_inds', tf.shape(y_inds))
     print(y_inds)
     
