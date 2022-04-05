@@ -6,6 +6,7 @@ Created on Thu Jan 20 17:14:30 2022
 
 """ A collection of custom metrics for keras """
 
+import numpy as np
 import tensorflow as tf
 import keras.backend as KB
 
@@ -29,7 +30,37 @@ def rmse(x, y):
   return KB.mean(KB.sqrt((x - y) ** 2))
 
 ## NDCG: normalised discounted cumulative gain
+## 1) basic version to work with arrays (numpy))
 def ndcg(y, y_hat, k):
+    
+    n = len(y)
+    ## select the k top examples
+    nk = np.round(k*n).astype(int)
+
+    ## decreasing order: use slicing
+    ## arr[start:end:step]
+    y_inds = np.argsort(y)[::-1] ##revert argsort to get decreasing order
+    y_sort_y = y[y_inds]
+    y_hat_inds = np.argsort(y_hat)[::-1]
+    y_sort_y_hat = y[y_hat_inds]
+    
+    seq = np.arange(1.0, nk+1)
+    d = 1/np.log2(seq+1)
+    
+    ## subset arrays
+    sliced_y_hat = y_sort_y_hat[0:nk]
+    sliced_y = y_sort_y[0:nk]
+    
+    num = sum(sliced_y_hat*d)
+    den = sum(sliced_y*d)
+
+    temp = num/den
+    
+    return(temp)
+
+
+## 2) version for tensors (Keras) [in progress]
+def ndcg_tf(y, y_hat, k):
     
     #n = len(y)
     kt = tf.convert_to_tensor(k, dtype=tf.float32)
@@ -80,16 +111,16 @@ def ndcg(y, y_hat, k):
 
 def ndcg_25(y, yhat):
     
-    return(ndcg(y, yhat, 0.25))
+    return(ndcg_tf(y, yhat, 0.25))
     
 
 def ndcg_50(y, yhat):
     
-    return(ndcg(y, yhat, 0.50))
+    return(ndcg_tf(y, yhat, 0.50))
 
 def ndcg_100(y, yhat):
     
-    return(ndcg(y, yhat, 1.0))
+    return(ndcg_tf(y, yhat, 1.0))
     
 def ndcg_nok(y, y_hat):
     
