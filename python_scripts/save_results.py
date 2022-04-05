@@ -89,12 +89,12 @@ def writeout_results(res, filename):
             res.to_csv(filename, mode='w', header=True)
             return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
 
-def get_predictions(model, val_x, val_y, config):
+def get_predictions(model, val_x, val_y, sel_val, config):
     
     ## calculate predictions and make DF with y and y_hat
     predictions = model.predict(val_x)
     predictions = np.concatenate(predictions, axis=0 )
-    temp = pd.DataFrame({'y':val_y, 'y_hat':predictions})
+    temp = pd.DataFrame({'id':sel_val, 'y':val_y, 'y_hat':predictions})
     
     print('dataframe with {} predictions created'.format(len(temp)))
     
