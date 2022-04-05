@@ -89,6 +89,12 @@ def writeout_results(res, filename):
             res.to_csv(filename, mode='w', header=True)
             return "Creating folder '{}' and writing results to file {}".format(basedir, os.path.basename(filename))
 
+## calculate predictions from Keras model object
+## arguments are:
+## model object from Keras fit()
+## val_x, val_y: features (kinship) and phenotypes in the validation set
+## sel_val: indices of examples in the validation (~ IDs)
+## config: Python dictionary with configuration parameters
 def get_predictions(model, val_x, val_y, sel_val, config):
     
     ## calculate predictions and make DF with y and y_hat

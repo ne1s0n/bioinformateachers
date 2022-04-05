@@ -25,7 +25,7 @@ def train_val_split(x, y, validation_split):
 	train_y = np.array(train_y)
 	val_y = np.array(val_y)
 	
-	#and we are done
+	#and we are done (returning also validation indices to keep track of examples)
 	return(train_x, train_y, val_x, val_y, sel_val)
 
 #data augmentation on either x, y, or both. Adding normal noise. The selection of target
