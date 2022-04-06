@@ -10,6 +10,7 @@ Created on Mon Jan 24 11:50:14 2022
 
 import os
 import re
+import time
 import json
 import numpy as np
 import pandas as pd
@@ -100,7 +101,8 @@ def get_predictions(model, val_x, val_y, sel_val, config):
     ## calculate predictions and make DF with y and y_hat
     predictions = model.predict(val_x)
     predictions = np.concatenate(predictions, axis=0 )
-    temp = pd.DataFrame({'id':sel_val, 'y':val_y, 'y_hat':predictions})
+    tmstmp = round(time.time())
+    temp = pd.DataFrame({'timestamp':tmstmp,'id':sel_val, 'y':val_y, 'y_hat':predictions})
     
     print('dataframe with {} predictions created'.format(len(temp)))
     
