@@ -30,7 +30,7 @@ parser.add_argument('-s', '--target_dir', type=str, required=True,
                     help='directory where data are to be stored (created if needed)')
 parser.add_argument('-d', '--dataset', type=str, required=True, 
                     help='dataset (e.g. cattle, maize, tropical_maize, etc.)')
-parser.add_argument('--fname', type=str, required=True, default='phenotypes',
+parser.add_argument('--fname', type=str, required=False, default='phenotypes',
                     help='basename (without extension) of phenotype file to be downloaded')
 parser.add_argument('--sorted', type=bool, required=False, default=True,
                     help='should the sorted (default) or unsorted phenotype data be downloaded?')
