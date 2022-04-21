@@ -30,6 +30,8 @@ parser.add_argument('-s', '--target_dir', type=str, required=True,
                     help='directory where data are to be stored (created if needed)')
 parser.add_argument('-d', '--dataset', type=str, required=True, 
                     help='dataset (e.g. cattle, maize, tropical_maize, etc.)')
+parser.add_argument('--fname', type=str, required=True, default='phenotypes',
+                    help='basename (without extension) of phenotype file to be downloaded')
 parser.add_argument('--sorted', type=bool, required=False, default=True,
                     help='should the sorted (default) or unsorted phenotype data be downloaded?')
 parser.add_argument('-p', '--trait', type=str, required=True,
@@ -43,6 +45,7 @@ args = parser.parse_args()
 print('Remote folder is:', args.remote_folder)
 print('Target folder is:', args.target_dir)
 print('Dataset is:', args.dataset)
+print('Name of file to download is:', args.fname)
 print('Sorted or not?', 'sorted' if args.sorted == True else 'non sorted')
 print('Selected trait:', args.trait)
 print('Output type:', '2d Pandas dataframe' if args.outtype == True else '1d numpy array')
@@ -76,11 +79,11 @@ print('Data will be downloaded to:', base_dir)
 # and an ordered one-dimensional array (or a `Pandas` dataframe with two columns: `sample` and `trait`) 
 # is created where the phenotype data are stored
 
-download_phenotype_files(base_dir, remote_data_folder, is_sorted=args.sorted)
+download_phenotype_files(base_dir, remote_data_folder, fnaam=args.fname, is_sorted=args.sorted)
 
 #trait = 'simphe_mean0_hSquare0.7_cv0.1_QTN100_A10_D0_AA0_AD0_DA0_DD0_epoch1642079623'
 trait = args.trait
-phenotypes = load_phenotypes_and_select_trait(base_dir, trait, is_sorted=args.sorted, 
+phenotypes = load_phenotypes_and_select_trait(base_dir, trait, fnaam=args.fname, is_sorted=args.sorted, 
                                               df_output=args.outtype)
 
 #print(phenotypes)

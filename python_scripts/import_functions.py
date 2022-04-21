@@ -93,12 +93,12 @@ def stack_kinship(base_dir):
 
 ## function that downloads the phenotype data files
 ## by default the sorted phenotypes (otherwise unsorted)
-def download_phenotype_files(target_dir,remote_data_folder,is_sorted=True):
+def download_phenotype_files(target_dir,remote_data_folder,fnaam='phenotypes',is_sorted=True):
     
     print('create folder', target_dir)
     os.makedirs(target_dir, exist_ok=True)
     
-    fnames = ["phenotypes_sorted.csv"] if is_sorted == True else ["phenotypes.csv"] 
+    fnames = [fnaam + "_sorted.csv"] if is_sorted == True else [fnaam + ".csv"] 
     
     filenames = glob.glob(target_dir + '*.csv')
     filenames = [os.path.basename(x) for x in filenames]
@@ -118,9 +118,9 @@ def download_phenotype_files(target_dir,remote_data_folder,is_sorted=True):
 ## load the phenotypic data
 ## read the file and select the trait
 ## convert to either a 1d or 2d array
-def load_phenotypes_and_select_trait(base_dir, trait, is_sorted=True, df_output=False):
+def load_phenotypes_and_select_trait(base_dir, trait, fnaam='phenotypes', is_sorted=True, df_output=False):
     
-    fname = 'phenotypes_sorted.csv' if is_sorted == True else 'phenotypes.csv'
+    fname = fnaam + '_sorted.csv' if is_sorted == True else fnaam + '.csv'
     print("select trait {} from phenotype file {}".format(trait,base_dir+fname))
     
     path_to_file = base_dir + fname
