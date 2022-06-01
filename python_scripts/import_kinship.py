@@ -19,7 +19,7 @@ into different subfolders (e.g. /cattle/)
 
 import os
 import argparse
-from import_functions import make_filenames, download_files, stack_kinship
+from import_functions import make_filenames, download_files, stack_kinship, download_files2
 
 
 # Create the parser
@@ -68,7 +68,8 @@ print('Data will be downloaded to:', base_dir)
 # Kinship matrices are read from gzipped csv files, and then stacked together in a 3D array
 
 make_filenames()
-download_files(target_dir=base_dir, remote_data_folder=remote_data_folder)
+#download_files(target_dir=base_dir, remote_data_folder=remote_data_folder)
+download_files2(target_dir=base_dir, remote_data_folder=remote_data_folder)
 kinship = stack_kinship(base_dir=base_dir)
 
 print("the object 'kinship' has been created, with dimensions {}".format(kinship.shape))
