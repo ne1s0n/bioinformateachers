@@ -94,8 +94,12 @@ def download_files2(target_dir,remote_data_folder):
         else:
             url = remote_data_folder + name
             outfname = target_dir + name
+            print("Downloading", url)
+            
             ## urlretrieve(remote_url, destination_path)
             urlrtv = request.urlretrieve(url=url, filename=outfname)
+            
+            ## unzipping files
             title = target_dir + name.strip(".gz")
             with gzip.open(outfname, 'rb') as f_in:
                 with open(title, 'wb') as f_out:
