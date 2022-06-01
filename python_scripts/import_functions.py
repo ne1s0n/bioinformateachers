@@ -104,7 +104,7 @@ def download_files2(target_dir,remote_data_folder):
             with gzip.open(outfname, 'rb') as f_in:
                 with open(title, 'wb') as f_out:
                     shutil.copyfileobj(f_in, f_out)
-            os.remove(f_in)
+            os.remove(outfname)
 
 ## function to stack kinships into a 3D array
 def stack_kinship(base_dir):
