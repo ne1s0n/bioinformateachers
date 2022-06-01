@@ -9,10 +9,16 @@ Created on Wed Dec 29 16:02:49 2021
 """
 importing relevant libraries
 """
+
+
 import os
 import glob
+import gzip
+import shutil
+import urllib
 import requests
 import itertools
+from urllib import request
 
 import numpy as np
 import pandas as pd
@@ -70,6 +76,28 @@ def download_files(target_dir,remote_data_folder):
             r = requests.get(url)
             open(target_dir + name.strip(".gz"), 'wb').write(r.content)
 
+
+## function that downloads data files
+def download_files2(target_dir,remote_data_folder):
+    
+    print('create folder', target_dir)
+    os.makedirs(target_dir, exist_ok=True)
+    
+    fnames = make_filenames()
+    
+    filenames = glob.glob(target_dir + '*')
+    filenames = [os.path.basename(x) for x in filenames]
+    
+    for name in fnames:
+        if name.strip(".gz") in filenames:
+            continue
+        else:
+            url = remote_data_folder + name
+            urlrtv = request.urlretrieve(url=url, filename=name)
+            title = target_dir + name.strip(".gz")
+            with gzip.open(name, 'rb') as f_in:
+                with open(title, 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
 
 ## function to stack kinships into a 3D array
 def stack_kinship(base_dir):
