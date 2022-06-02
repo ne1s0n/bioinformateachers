@@ -90,7 +90,7 @@ def download_files2(target_dir,remote_data_folder):
     
     for name in fnames:
         if name.strip(".gz") in filenames:
-            print('file', name, 'already exists')
+            #print('file', name, 'already exists')
             continue
         else:
             url = remote_data_folder + name
