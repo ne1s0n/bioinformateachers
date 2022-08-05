@@ -19,7 +19,7 @@ into different subfolders (e.g. /cattle/)
 
 import os
 import argparse
-from import_functions import make_filenames, download_files, stack_kinship
+from import_functions import make_filenames, download_files, stack_kinship, download_files2
 
 
 # Create the parser
