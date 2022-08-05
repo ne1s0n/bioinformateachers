@@ -7,6 +7,8 @@ Exercises are in the form of [jupyter notebooks](https://jupyter.org/) and can b
 Launch everything on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ne1s0n/coding_excercises/HEAD)(it may take a few minutes to load)
 
 
+- [**Basic Python**](day1_code00_basic_python_[EXERCISE].ipynb): a primer on python syntax
+    - Topics: lists, numpy, pandas, matplotlib
 - [**Balance**](balance.ipynb): solving a simple physics problem
     - Topics: lists, loops, functions, execution times and plots
 - [**Words**](words.ipynb): word count and other text statistics
