@@ -10,9 +10,15 @@ This is a (aperiodically updated) reading list where I put articles, posts and n
   	* align, filtering -> dDocent
   	* variant calling -> freebayes ("naive" config just to obtain allele counts)
  	* filters: biallelic SNPs only, minimum depth of 6 or 20 reads -> bcftools
-  * actual calling -> updog R package
+  	* actual calling -> updog R package
   * using also allele ratios for predictions, i.e. A/(A+a)
 * [2018] [Development and Applications of a High Throughput Genotyping Tool for Polyploid Crops: Single Nucleotide Polymorphism (SNP) Array](https://www.frontiersin.org/articles/10.3389/fpls.2018.00104/full)
+	* review, nice intro on the polyploid topic (history, role in agriculture, neopolyploids), problems with SNP discovery, features of SNP array technology
+	* "Ploidy is a significant factor impacting SNP qualities and validation rates of SNP markers in SNP arrays... This review presents a complete overview of SNP array development and applications in polypoid crops, which will benefit the research in molecular breeding and genetics of crops with complex genomes"
+	
+## To be investigated
+
+* [2015] [Polyploidy and genome evolution in plants](https://www.sciencedirect.com/science/article/pii/S0959437X15001185?casa_token=LAet5jlt-KgAAAAA:5BZNAFkkq4ij0kGhz4VUzrxhbzfUSY8L9pns29BHQJ_ha9avGT0bkZtCM2xEDevuBgtw_1sh8ns)
 * [2022] [A joint learning approach for genomic prediction in polyploid grasses](https://www.nature.com/articles/s41598-022-16417-7)
 * [2023] [Polyploid SNP Genotyping Using the MassARRAY System](https://link.springer.com/protocol/10.1007/978-1-0716-3024-2_7)
   * contacted the authors, requested full text
