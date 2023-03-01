@@ -21,17 +21,18 @@ Contributions are welcome :)
 	* table with all the available (at the time) SNP array for polyploid species
 	* "Ploidy is a significant factor impacting SNP qualities and validation rates of SNP markers in SNP arrays... This review presents a complete overview of SNP array development and applications in polypoid crops, which will benefit the research in molecular breeding and genetics of crops with complex genomes"
 	* "There are two types of SNPs: transition SNPs such as A/G, T/C, and transversion SNPs such as A/T, C/G, A/C, and T/G. For SNP array development, the transition SNP type is preferred and transversion SNPs, INDELs, or multiple allelic SNPs are typically excluded (Bianco et al., 2016; Clarke et al., 2016). Particularly, A/T or C/G SNPs are eliminated, as these types require two probes, while other SNP types require just one probe for genotyping"
-	* "So far, there are two software, fitTetra
-and ClusterCall, written for tetraploids, which can call five
-genotypes. Another software, SuperMASSA, was written for all
-ploidies (so far only successfully reported in sugarcane)." (for array data only?)
+	* "So far, there are two software, fitTetra and ClusterCall, written for tetraploids, which can call five genotypes. Another software, SuperMASSA, was written for all ploidies (so far only successfully reported in sugarcane)." (for array data only?)
+* [2023] [Polyploid SNP Genotyping Using the MassARRAY System](https://link.springer.com/protocol/10.1007/978-1-0716-3024-2_7)
+  * focus on MassARRAY, as an alternative to GBS
+  * The paper extends the base MassARRAY/Sequenom protocol from diploids to polyploids, plus brief discussion on the related softwares
+  * "the MassARRAY platform (Sequenom Inc.), based on matrix-assisted laser desorption/ionization time-of-flight (MALDI-TOF) spectrometry, is widely recognized for its ability to perform accurate SNP genotyping analyses. It generates spectra with two signals for each heterozygous locus, and the ratio between these signals can beused to provide the relative abundance of alleles."
+  * MassARRAY requires two subsequent PCRs (the second one known as iPLEX reaction)
+  * "The assay’s design relies on prior knowledge of the sequences where the SNPs of interest are located and the ability to find an adequate set of primers in this region."
 	
 ## To be investigated (stuff that I haven't read, yet)
 
 * [2015] [Polyploidy and genome evolution in plants](https://www.sciencedirect.com/science/article/pii/S0959437X15001185?casa_token=LAet5jlt-KgAAAAA:5BZNAFkkq4ij0kGhz4VUzrxhbzfUSY8L9pns29BHQJ_ha9avGT0bkZtCM2xEDevuBgtw_1sh8ns)
 * [2022] [A joint learning approach for genomic prediction in polyploid grasses](https://www.nature.com/articles/s41598-022-16417-7)
-* [2023] [Polyploid SNP Genotyping Using the MassARRAY System](https://link.springer.com/protocol/10.1007/978-1-0716-3024-2_7)
-  * contacted the authors, requested full text
 * [2022] [Recent Advances and Applicability of GBS, GWAS, and GS in Polyploid Crops](https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119745686.ch15)
   * contacted the authors, requested full text
 * [Robust and efficient software for reference-free genomic diversity analysis of genotyping-by-sequencing data on diploid and polyploid species](https://onlinelibrary.wiley.com/doi/abs/10.1111/1755-0998.13477)
