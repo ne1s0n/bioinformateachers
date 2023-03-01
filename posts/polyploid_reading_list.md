@@ -31,10 +31,29 @@ Contributions are welcome :)
 	
 ## NGS Polyploid-oriented pipelines
 
-* [fast-GBS](https://pubmed.ncbi.nlm.nih.gov/33006480/)
-	* paper behind paywall
-	* wiki: https://bitbucket.org/jerlar73/fast-gbs_v2/wiki/Home
-* [UGbs-Flex](https://pubmed.ncbi.nlm.nih.gov/29902967/)
+* [2020] [fast-GBS v2](https://pubmed.ncbi.nlm.nih.gov/33006480/)
+	* paper behind paywall :(
+	* wiki & software: https://bitbucket.org/jerlar73/fast-gbs_v2/wiki/Home
+	* requires reference genome, possibly paired with companion software 
+	[SGR extractor](https://bitbucket.org/jerlar73/srg-extractor/src/master/) to
+	create a "skinny" reference genome with only the parts interested by reduced
+	representation
+	* main softwares needed: sabre (demultiplex), cutadapt (trimming), bwa (alignment),
+	  samtools & vcftools (various manipulations), platypus (variant calling), beagle (imputation)
+	* python based
+* [UGbs-Flex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6003085/)
+	* does not require reference genome
+	* python + perl based
+	* wiki & software: https://devoslab.franklinresearch.uga.edu/scripts-used-gbs-pipeline
+	* no preprocessing, in the paper they use Stacks (demultiplexing) and
+	FASTX Toolkit (trimming), Flash (overlapping forward/reverse reads)
+	* reference genome via clustering (ustacks/cstacks from the Stacks suite)
+	* internally using bowtie (alignment), gatk (SNP calling)
+	* they claim to be superior to GBS-SNP-CROP pipelines (more SNPs retained)
+	* nice work on genetic map reconstruction (they work without reference genome)
+	* optimization of the wetlab part of GBS (choice of restriction enzyme, size selection...)
+	
+	
 * [PolyRAD](https://github.com/lvclark/polyRAD#citation)
 
 ## To be investigated (stuff that I haven't read, yet)
