@@ -41,20 +41,24 @@ Contributions are welcome :)
 	* main softwares needed: sabre (demultiplex), cutadapt (trimming), bwa (alignment),
 	  samtools & vcftools (various manipulations), platypus (variant calling), beagle (imputation)
 	* python based
-* [UGbs-Flex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6003085/)
+* [2018] [UGbs-Flex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6003085/)
 	* does not require reference genome
 	* python + perl based
 	* wiki & software: https://devoslab.franklinresearch.uga.edu/scripts-used-gbs-pipeline
-	* no preprocessing, in the paper they use Stacks (demultiplexing) and
-	FASTX Toolkit (trimming), Flash (overlapping forward/reverse reads)
+	* no preprocessing, in the paper they use Stacks (demultiplexing) and FASTX Toolkit (trimming), Flash (overlapping forward/reverse reads)
 	* reference genome via clustering (ustacks/cstacks from the Stacks suite)
 	* internally using bowtie (alignment), gatk (SNP calling)
 	* they claim to be superior to GBS-SNP-CROP pipelines (more SNPs retained)
 	* nice work on genetic map reconstruction (they work without reference genome)
 	* optimization of the wetlab part of GBS (choice of restriction enzyme, size selection...)
-	
-	
-* [PolyRAD](https://github.com/lvclark/polyRAD#citation)
+* [2019] [PolyRAD](https://academic.oup.com/g3journal/article/9/3/663/6026786?login=false)
+	* wiki & software: https://github.com/lvclark/polyRAD
+	* R package
+	* "The polyRAD software imports read depth from several existing pipelines, and outputs continuous or discrete numerical genotypes suitable for analyses such as genome-wide association and genomic prediction."
+	* main competitor: updog (R package)
+	* "Initially, SNP discovery is performed by other software such as TASSEL (Glaubitz et al. 2014) or Stacks (Catchen et al. 2013), with or without a reference genome, then allelic read depth is imported into polyRAD from those pipelines or the read counting software TagDigger (Clark and Sacks 2016)."
+	* "*c* is the cross-contamination rate [...] estimated by including a negative control in library preparation, i.e., of the set of ligation reactions with barcoded adapters, one that has no genomic DNA added. The sequence read depth for this blank barcode is then divided by the mean read depth of non-blank barcodes in order to estimate c. Our model assumes c to be constant across loci, under the assumption that most errors are due to contamination during library preparation. In practice we have found c to typically be 1/1000 (unpublished data), and expect it to be more substantial than errors arising from the sequencing technology, which will tend to produce haplotypes not found elsewhere in the data set."
+	* "Bayesian genotype estimation allows correction of genotyping errors in diploids and polyploids, i.e., when an individual is truly heterozygous but only one allele was sequenced, or when an individual appears heterozygous due to sequencing error or contamination but is truly homozygous."
 
 ## To be investigated (stuff that I haven't read, yet)
 
