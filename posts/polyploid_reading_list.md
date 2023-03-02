@@ -84,4 +84,6 @@ Contributions are welcome :)
 * [2014] [Development of an Alfalfa SNP Array and Its Use to Evaluate Patterns of Population Structure and Linkage Disequilibrium](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0084329)
   * SNP array for alfalfa
 * [2016] [Genome-Wide SNP Calling from Genotyping by Sequencing (GBS) Data: A Comparison of Seven Pipelines and Two Sequencing Technologies](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0161333)
+* [2023] [Sequencing and Assembly of Polyploid Genomes](https://link.springer.com/protocol/10.1007/978-1-0716-2561-3_23)
+	* protocol details
 
