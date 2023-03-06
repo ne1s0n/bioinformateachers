@@ -40,7 +40,7 @@ Contributions are welcome :)
 	representation
 	* main softwares needed: sabre (demultiplex), cutadapt (trimming), bwa (alignment),
 	  samtools & vcftools (various manipulations), platypus (variant calling), beagle (imputation)
-	* python based
+	* python based, as of Feb 2023 supports only 2.7+, I tested with Python3 and received too many errors to be able to successfully install
 * [2018] [UGbs-Flex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6003085/)
 	* does not require reference genome
 	* python + perl based
