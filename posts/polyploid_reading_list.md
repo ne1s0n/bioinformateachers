@@ -62,6 +62,7 @@ Contributions are welcome :)
 
 ## To be investigated (stuff that I haven't read, yet)
 
+* [2022] [A joint learning approach for genomic prediction in polyploid grasses](https://www.nature.com/articles/s41598-022-16417-7)
 * [2015] [Polyploidy and genome evolution in plants](https://www.sciencedirect.com/science/article/pii/S0959437X15001185?casa_token=LAet5jlt-KgAAAAA:5BZNAFkkq4ij0kGhz4VUzrxhbzfUSY8L9pns29BHQJ_ha9avGT0bkZtCM2xEDevuBgtw_1sh8ns)
 * [2022] [A joint learning approach for genomic prediction in polyploid grasses](https://www.nature.com/articles/s41598-022-16417-7)
 * [2022] [Recent Advances and Applicability of GBS, GWAS, and GS in Polyploid Crops](https://onlinelibrary.wiley.com/doi/abs/10.1002/9781119745686.ch15)
