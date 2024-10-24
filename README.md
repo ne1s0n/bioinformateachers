@@ -22,12 +22,13 @@ covered in the book:
 7. Logistic regression with neural networks
 8. Softmax regression with neural networks
 9. Linear regression with neural networks [F.]
-10. Basic RNN [F.]
-11. Specialized RNN [F.]
-12. Data augmentation [N.]
-13. Embeddings [F.]
-14. Transfer learning [N.]
-15. Feature selection [N.]
-16. Opening the black box [N.]
-17. Transformers? [F.]
+10. Basic dense NN models [F.]
+11. Basic RNN [F.]
+12. Specialized RNN [F.]
+13. Data augmentation [N.]
+14. Embeddings [F.]
+15. Transfer learning [N.]
+16. Feature selection [N.]
+17. Opening the black box [N.]
+18. Transformers? [F.]
 
