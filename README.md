@@ -14,19 +14,21 @@ these notebooks are meant to provide code and exercise to illustrate some of the
 covered in the book:
 
 1. K-means clustering
-2. Confusion matrix
-3. ROC, AUC, MCC
-4. Additional model performance metrics
+2. Confusion matrix [N.]
+3. ROC, AUC, MCC [F.]
+4. Additional model performance metrics [N.]
 5. Backpropagation
 6. Function approximation
 7. Logistic regression with neural networks
 8. Softmax regression with neural networks
-9. Linear regression with neural networks
-10. Basic RNN
-11. Specialized RNN
-12. Data augmentation
-13. Embeddings
-14. Transfer learning
-15. Feature selection
-16. Opening the black box
+9. Linear regression with neural networks [F.]
+10. Basic dense NN models [F.]
+11. Basic RNN [F.]
+12. Specialized RNN [F.]
+13. Data augmentation [N.]
+14. Embeddings [F.]
+15. Transfer learning [N.]
+16. Feature selection [N.]
+17. Opening the black box [N.]
+18. Transformers? [F.]
 
