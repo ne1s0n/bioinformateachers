@@ -5,3 +5,28 @@ Code archive linked to the bioinformatics-oriented educational website [The Bioi
 - [Amplicon sequencing: a quick look at the construct](https://bioinformateachers.github.io/bioinformatics/microbiome/2022/06/11/quick-ampliseq.html)
 - [R tip: remove the last character from an array of strings](https://bioinformateachers.wordpress.com/2022/05/25/r-tip-remove-the-last-character-from-an-array-of-strings/)
 - [Super-quick recap of linear mixed models](https://bioinformateachers.github.io/statistics/quantitative-genetics/linear-algebra/2022/01/05/linear-mixed-models.html)
+
+# An introduction to deep learning for data analysis problems in biology [book]
+###  (with applications in Python)
+
+In the folder [dlb](dlb/) we store a collection of Python notebooks linked to the book: 
+these notebooks are meant to provide code and exercise to illustrate some of the concepts 
+covered in the book:
+
+1. K-means clustering
+2. Confusion matrix
+3. ROC, AUC, MCC
+4. Additional model performance metrics
+5. Backpropagation
+6. Function approximation
+7. Logistic regression with neural networks
+8. Softmax regression with neural networks
+9. Linear regression with neural networks
+10. Basic RNN
+11. Specialized RNN
+12. Data augmentation
+13. Embeddings
+14. Transfer learning
+15. Feature selection
+16. Opening the black box
+
