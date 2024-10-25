@@ -6,7 +6,7 @@ Code archive linked to the bioinformatics-oriented educational website [The Bioi
 - [R tip: remove the last character from an array of strings](https://bioinformateachers.wordpress.com/2022/05/25/r-tip-remove-the-last-character-from-an-array-of-strings/)
 - [Super-quick recap of linear mixed models](https://bioinformateachers.github.io/statistics/quantitative-genetics/linear-algebra/2022/01/05/linear-mixed-models.html)
 
-# An introduction to deep learning for data analysis problems in biology [book]
+# Deep Learning for Life Sciences [book]
 ###  (with applications in Python)
 
 In the folder [dlb](dlb/) we store a collection of Python notebooks linked to the book: 
