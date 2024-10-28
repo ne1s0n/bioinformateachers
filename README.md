@@ -22,7 +22,7 @@ covered in the book:
 7. Logistic regression with neural networks
 8. Softmax regression with neural networks
 9. Linear regression with neural networks [F.]
-10. Basic dense NN models [F.]
+10. From basic regression to deeper NN models [F.]
 11. Basic RNN [F.]
 12. Specialized RNN [F.]
 13. Data augmentation [N.]
