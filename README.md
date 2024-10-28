@@ -17,10 +17,10 @@ covered in the book:
 2. Confusion matrix [N.]
 3. ROC, AUC, MCC [F.]
 4. Additional model performance metrics [N.]
-5. Backpropagation
-6. Function approximation
-7. Logistic regression with neural networks
-8. Softmax regression with neural networks
+5. [Backpropagation](dlb/backpropagation/backpropagation.ipynb)
+6. [Function approximation](dlb/function_approximation/function_approximation.ipynb)
+7. [Logistic regression with neural networks](dlb/regression/logistic_regression.ipynb)
+8. [Softmax regression with neural networks](dlb/regression/softmax_regression.ipynb)
 9. Linear regression with neural networks [F.]
 10. From basic regression to deeper NN models [F.]
 11. Basic RNN [F.]
