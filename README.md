@@ -13,7 +13,7 @@ In the folder [dlb](dlb/) we store a collection of Python notebooks linked to th
 these notebooks are meant to provide code and exercise to illustrate some of the concepts 
 covered in the book:
 
-1. K-means clustering
+1. [K-means clustering](dlb/archipelago/lab_full.ipynb)
 2. Confusion matrix [N.]
 3. ROC, AUC, MCC [F.]
 4. Additional model performance metrics [N.]
