@@ -14,15 +14,15 @@ these notebooks are meant to provide code and exercise to illustrate some of the
 covered in the book:
 
 1. [K-means clustering](dlb/archipelago/lab_full.ipynb)
-2. Confusion matrix [N.]
-3. ROC, AUC, MCC [F.]
-4. Additional model performance metrics [N.]
+2. [Confusion matrix](dlb/measure_model_performance/confusion_matrix.ipynb)
+3. [ROC, AUC, MCC](dlb/measure_model_performance/roc_auc_mcc.ipynb)
+4. [Additional model performance metrics](dlb/measure_model_performance/additional_metrics.ipynb)
 5. [Backpropagation](dlb/backpropagation/backpropagation.ipynb)
 6. [Function approximation](dlb/function_approximation/function_approximation.ipynb)
 7. [Logistic regression with neural networks](dlb/regression/logistic_regression.ipynb)
 8. [Softmax regression with neural networks](dlb/regression/softmax_regression.ipynb)
-9. Linear regression with neural networks [F.]
-10. From basic regression to deeper NN models [F.]
+9. [Linear regression with neural networks](dlb/regression/linear_regression.ipynb)
+10. [From basic regression to deeper NN models](dlb/dense_NN/basic_dense_NN_models.ipynb)
 11. Basic RNN [F.]
 12. Specialized RNN [F.]
 13. Data augmentation [N.]
