@@ -23,12 +23,12 @@ covered in the book:
 8. [Softmax regression with neural networks](dlb/regression/softmax_regression.ipynb)
 9. [Linear regression with neural networks](dlb/regression/linear_regression.ipynb)
 10. [From basic regression to deeper NN models](dlb/dense_NN/basic_dense_NN_models.ipynb)
-11. Basic RNN [F.]
-12. Specialized RNN [F.]
-13. Data augmentation [N.]
-14. Embeddings [F.]
-15. Transfer learning [N.]
-16. Feature selection [N.]
-17. Opening the black box [N.]
-18. Transformers? [F.]
+11. Basic RNN [TODO]
+12. Specialized RNN [TODO]
+13. [Data augmentation](dlb/data_augmentation/data_augmentation.ipynb)
+14. Embeddings [TODO]
+15. [Transfer learning](dlb/transfer_learning/transfer_learning.ipynb)
+16. [Feature selection](dlb/inside_the_network/feature_selection.ipynb)
+17. [Opening the black box](dlb/inside_the_network/opening_black_box.ipynb)
+18. Transformers? [TODO]
 
