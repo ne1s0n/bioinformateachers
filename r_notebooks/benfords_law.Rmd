@@ -2,6 +2,9 @@
 title: "Benford's Law"
 output: html_document
 date: "2026-09-24"
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -12,10 +15,21 @@ library("ggplot2")
 library("data.table")
 ```
 
+$$
+P(d) = \left( 1 + \frac{1}{d} \right)
+$$
 
-```{r data}
-genomes100 <- fread("data/animal_plant_genomes_100.csv")
-```
+| digit | probability |
+|-------|-------------|
+|1 | 0.30103000 
+|2 | 0.17609126 
+|3 | 0.12493874 
+|4 | 0.09691001 
+|5 | 0.07918125 
+|6 | 0.06694679 
+|7 | 0.05799195 
+|8 | 0.05115252 
+|9 | 0.04575749
 
 ```{r}
 # Custom function for mathematical extraction
@@ -24,6 +38,16 @@ get_first_digit <- function(x) {
 }
 ```
 
+### 100 plant and animal genome sizes
+
+```{r data}
+genomes100 <- fread("../data/animal_plant_genomes_100.csv")
+```
+
+```{r}
+min_size = log10(min(genomes100$genome_size_bp))
+max_size = log10(max(genomes100$genome_size_bp))
+```
 
 ```{r digits, echo=FALSE}
 first_digits <- get_first_digit(genomes100$genome_size_bp)
@@ -35,20 +59,50 @@ df$proportion <- df$Freq/nrow(genomes100)
 ```
 
 ```{r}
-ggplot(df, aes(x = first_digits, y = Freq)) + geom_bar(stat = "identity")
+ggplot(df, aes(x = first_digits, y = proportion)) + geom_bar(stat = "identity")
 ```
 
-```{r data}
-genomes1000 <- fread("data/genome_sizes_1000_template.csv")
-```
-
-
-```{r digits, echo=FALSE}
-first_digits <- get_first_digit(genomes1000$genome_size_bp)
-df <- data.frame(table(first_digits))
-df$proportion <- df$Freq/nrow(genomes1000)
+```{r benford}
+benford <- function(x) { return(log10(1 + 1/x)) }
 ```
 
 ```{r}
-ggplot(df, aes(x = first_digits, y = Freq)) + geom_bar(stat = "identity")
+benford_props <- benford(1:9)
+df$benford = benford_props
+# df |> 
+#   select(first_digits, benford) |>
+#   rename(digit = first_digits, proportion = benford) |>
+#   fwrite(file = "../data/benford.csv", sep = ",")
+```
+
+```{r}
+ggplot(df) + geom_bar(aes(x = first_digits, y = proportion), stat = "identity") + 
+  geom_line(aes(x = first_digits, y = benford, group = 1), stat="identity", color="red", size=2)
+```
+
+### Microbiota data
+
+OTUs from the rumen microbiota of calves (Biscarini et al. 2018)
+
+```{r}
+otus <- fread("../data/otu.table.txt")
+X <- as.matrix(otus[,-1])
+x <- rowSums(X)
+```
+
+```{r}
+min_size = log10(min(x))
+max_size = log10(max(x))
+```
+
+```{r}
+first_digits <- get_first_digit(x)
+df <- data.frame(table(first_digits))
+df$proportion <- df$Freq/length(x)
+df$benford = benford_props
+```
+
+```{r}
+ggplot(df) + geom_bar(aes(x = first_digits, y = proportion), stat = "identity") + 
+  geom_line(aes(x = first_digits, y = benford, group = 1), stat="identity", color="red", size=2)
 ```
