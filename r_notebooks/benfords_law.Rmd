@@ -1,0 +1,54 @@
+---
+title: "Benford's Law"
+output: html_document
+date: "2026-09-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library("dplyr")
+library("ggplot2")
+library("data.table")
+```
+
+
+```{r data}
+genomes100 <- fread("data/animal_plant_genomes_100.csv")
+```
+
+```{r}
+# Custom function for mathematical extraction
+get_first_digit <- function(x) {
+  floor(abs(x) / (10 ^ floor(log10(abs(x)) + 1e-9)))
+}
+```
+
+
+```{r digits, echo=FALSE}
+first_digits <- get_first_digit(genomes100$genome_size_bp)
+```
+
+```{r}
+df <- data.frame(table(first_digits))
+df$proportion <- df$Freq/nrow(genomes100)
+```
+
+```{r}
+ggplot(df, aes(x = first_digits, y = Freq)) + geom_bar(stat = "identity")
+```
+
+```{r data}
+genomes1000 <- fread("data/genome_sizes_1000_template.csv")
+```
+
+
+```{r digits, echo=FALSE}
+first_digits <- get_first_digit(genomes1000$genome_size_bp)
+df <- data.frame(table(first_digits))
+df$proportion <- df$Freq/nrow(genomes1000)
+```
+
+```{r}
+ggplot(df, aes(x = first_digits, y = Freq)) + geom_bar(stat = "identity")
+```
